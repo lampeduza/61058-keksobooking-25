@@ -16,9 +16,11 @@ const getRandomInteger = (minimalInteger, maximalInteger) => {
   /*
   // На доработку (в будущем)
   // Избавиться от ошибки "Do not nest ternary expressions no-nested-ternary", попытаться в одну строку
-  return minimalInteger < 0 ? 'Неприемлимо отрицательное значение' :
-    maximalInteger <= minimalInteger ? 'Максимальное значение не должно быть меньше или быть равно минимальному значению' :
-      Math.floor(Math.random() * (maximalInteger - minimalInteger + 1)) + minimalInteger;
+  return (minimalInteger < 0)
+    ? 'Неприемлимо отрицательное значение'
+    : (maximalInteger <= minimalInteger)
+      ? 'Максимальное значение не должно быть меньше или быть равно минимальному значению'
+      : Math.floor(Math.random() * (maximalInteger - minimalInteger + 1)) + minimalInteger;
   */
 };
 

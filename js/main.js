@@ -13,22 +13,18 @@ const checkArguments = (min, max) => {
   return Math.random() * (max - min + 1) + min;
 };
 
-const getRandomInteger = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
 
-  checkArguments(min, max);
-};
+const generateRandomNumber = (min, max, amountOfSymbolsAfterComma) => {
+  if (!amountOfSymbolsAfterComma) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+  }
 
-getRandomInteger(1, 5);
-
-// https://learn.javascript.ru/number
-const getRandomFloat = (min, max, amountOfSymbolsAfterComma) => {
-  checkArguments(min, max);
-
-  const random = checkArguments(min, max);
+  const random = checkArguments(min, max, amountOfSymbolsAfterComma);
   const randomToString = random.toFixed(amountOfSymbolsAfterComma);
+
   return +randomToString;
 };
 
-getRandomFloat(1, 5, 5);
+generateRandomNumber(1, 5);
+generateRandomNumber(1, 5, 5);

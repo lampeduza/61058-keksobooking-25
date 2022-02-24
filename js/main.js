@@ -9,22 +9,18 @@ const checkArguments = (min, max) => {
   if (max <= min) {
     throw new RangeError('Максимальное значение не должно быть меньше или равно минимальному');
   }
-
-  return Math.random() * (max - min + 1) + min;
 };
 
+const numberToFixed = (number, digits) => +number.toFixed(digits);
 
-const generateRandomNumber = (min, max, amountOfSymbolsAfterComma) => {
-  if (!amountOfSymbolsAfterComma) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-  }
+const getRandomFloat = (min, max, digits = 0) => {
+  min = numberToFixed(min, digits);
+  max = numberToFixed(max, digits);
 
-  const random = checkArguments(min, max, amountOfSymbolsAfterComma);
-  const randomToString = random.toFixed(amountOfSymbolsAfterComma);
+  checkArguments(min, max);
 
-  return +randomToString;
+  const randomNumber = Math.random() * (max - min + 1) + min;
+  return numberToFixed(randomNumber, digits);
 };
 
-generateRandomNumber(1, 5);
-generateRandomNumber(1, 5, 10);
+getRandomFloat(1, 5, 5);

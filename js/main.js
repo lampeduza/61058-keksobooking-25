@@ -27,4 +27,4 @@ const generateRandomNumber = (min, max, amountOfSymbolsAfterComma) => {
 };
 
 generateRandomNumber(1, 5);
-generateRandomNumber(1, 5, 5);
+generateRandomNumber(1, 5, 10);

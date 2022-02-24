@@ -1,7 +1,7 @@
 // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-const generateNumber = (min, max) => Math.random() * (max - min + 1) + min;
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError
 
-const generateError = (min, max) => {
+const checkArguments = (min, max) => {
   if (min < 0) {
     throw new RangeError('Неприемлимо отрицательное значение');
   }
@@ -9,24 +9,24 @@ const generateError = (min, max) => {
   if (max <= min) {
     throw new RangeError('Максимальное значение не должно быть меньше или равно минимальному');
   }
+
+  return Math.random() * (max - min + 1) + min;
 };
 
 const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
 
-  generateError(min, max);
-
-  return Math.floor(generateNumber(min, max));
+  checkArguments(min, max);
 };
 
 getRandomInteger(1, 5);
 
 // https://learn.javascript.ru/number
 const getRandomFloat = (min, max, amountOfSymbolsAfterComma) => {
-  generateError(min, max);
+  checkArguments(min, max);
 
-  const random = generateNumber(min, max);
+  const random = checkArguments(min, max);
   const randomToString = random.toFixed(amountOfSymbolsAfterComma);
   return +randomToString;
 };

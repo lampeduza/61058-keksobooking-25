@@ -73,21 +73,35 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-const getRandomArrayElement = (arrayElements) => arrayElements[getRandomFloat(0, arrayElements.length - 1)];
+const getRandomArrayElement = (elements) => elements[getRandomFloat(0, elements.length - 1)];
+
+const generateAvatar = () => {
+  let array = [];
+  let path = '';
+
+  for (let i = 1; i <= 10; i++) {
+    i < 10 ? path = 'img/avatars/user0' + i + '.png' : path = 'img/avatars/user' + i + '.png';
+    array[i - 1] = path;
+  }
+
+  return getRandomArrayElement(array);
+};
+
+generateAvatar();
 
 const generateAd = () => {
-  const locations = {
+  const locationData = {
     x: getRandomFloat(35.65000, 35.70000, 5),
     y: getRandomFloat(139.70000, 139.80000, 5)
   };
 
   return {
     author: {
-      avatar: 1
+      avatar: generateAvatar(),
     },
     offer: {
       title: getRandomArrayElement(TITLES),
-      address: locations.x + ' ' + locations.y,
+      address: locationData.x + ', ' + locationData.y,
       price: getRandomFloat(30000, 120000),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomFloat(1, 10),
@@ -99,10 +113,12 @@ const generateAd = () => {
       photos: PHOTOS, // ['array', 'of', 'strings']
     },
     location: {
-      lat: locations.x,
-      lng: locations.y
+      lat: locationData.x,
+      lng: locationData.y
     }
   };
 };
 
-console.log(generateAd());
+for (let i = 0; i <= 10; i++) {
+  console.log(generateAd());
+}

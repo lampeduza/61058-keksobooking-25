@@ -119,6 +119,9 @@ const generateAd = () => {
   };
 };
 
-for (let i = 0; i <= 10; i++) {
-  console.log(generateAd());
+let objectsArray = [];
+for (let i = 0; i < 10; i++) {
+  objectsArray[i] = generateAd();
 }
+
+console.log(objectsArray);

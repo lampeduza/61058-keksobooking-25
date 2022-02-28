@@ -80,9 +80,9 @@ const PHOTOS = [
 const getRandomArrayElement = (elements) => elements[getRandomFloat(0, elements.length - 1)];
 
 // generateAvatar (получилось странное решение, но эта функция хотя бы генерирует правильно элементы массива
-// не понимаю, как доработать до такого состояния, когда в возвращаемом объекте будут пути, которые не будут повторяться. 
+// не понимаю, как доработать до такого состояния, когда в возвращаемом объекте будут пути, которые не будут повторяться.
 const generateAvatar = () => {
-  let array = [];
+  const array = [];
   let path = '';
 
   for (let i = 1; i <= 10; i++) {
@@ -126,7 +126,7 @@ const generateAd = () => {
   };
 };
 
-let objectsArray = [];
+const objectsArray = [];
 for (let i = 0; i < 10; i++) {
   objectsArray[i] = generateAd();
 }

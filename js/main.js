@@ -75,18 +75,6 @@ const PHOTOS = [
 
 const getRandomArrayElement = (elements) => elements[getRandomFloat(0, elements.length - 1)];
 
-const generateAvatar = () => {
-  const array = [];
-  let path = '';
-
-  for (let i = 1; i <= 10; i++) {
-    i < 10 ? path = 'img/avatars/user0' + i + '.png' : path = 'img/avatars/user' + i + '.png';
-    array[i - 1] = path;
-  }
-
-  return getRandomArrayElement(array);
-};
-
 const shuffleArray = (array) => {
   for (let i = 0; i <= array.length - 1; i++) {
     const index = getRandomFloat(0, array.length - 1);
@@ -95,19 +83,32 @@ const shuffleArray = (array) => {
     array[i] = array[index];
     array[index] = swap;
   }
+
+  return array;
+};
+
+// Не получается сгенерировать уникальный элемент для каждого аватара
+const generateAvatar = () => {
+  const array = [];
+
+  for (let i = 0; i < 10; i++) {
+    array[i] = i < 9 ? 'img/avatars/user0' + (i + 1) + '.png' : 'img/avatars/user' + (i + 1) + '.png';
+  }
+
+  return shuffleArray(array);
 };
 
 const getMultipleStringsArray = (array) => {
   let clonedArray = array.slice();
 
-  shuffleArray(array);
+  shuffleArray(clonedArray);
 
   const arrayLength = getRandomFloat(1, clonedArray.length);
 
   return clonedArray = clonedArray.slice(0, arrayLength);
 };
 
-const generateAd = () => {
+const generateAd = (avatar) => {
   const locationData = {
     x: getRandomFloat(35.65000, 35.70000, 5),
     y: getRandomFloat(139.70000, 139.80000, 5)
@@ -115,7 +116,7 @@ const generateAd = () => {
 
   return {
     author: {
-      avatar: generateAvatar(),
+      avatar: 1,
     },
     offer: {
       title: getRandomArrayElement(TITLES),

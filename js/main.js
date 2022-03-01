@@ -87,11 +87,10 @@ const shuffleArray = (array) => {
   return array;
 };
 
-// Не получается сгенерировать уникальный элемент для каждого аватара
-const generateAvatar = () => {
+const generateAvatarsArray = () => {
   const array = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) { // unexpected string concatenation (prefer-template)
     array[i] = i < 9 ? 'img/avatars/user0' + (i + 1) + '.png' : 'img/avatars/user' + (i + 1) + '.png';
   }
 
@@ -99,13 +98,13 @@ const generateAvatar = () => {
 };
 
 const getMultipleStringsArray = (array) => {
-  let clonedArray = array.slice();
+  const clonedArray = array.slice();
 
   shuffleArray(clonedArray);
 
   const arrayLength = getRandomFloat(1, clonedArray.length);
 
-  return clonedArray = clonedArray.slice(0, arrayLength);
+  return clonedArray.slice(0, arrayLength); // return clonedArray = clonedArray.slice(0, arrayLength);
 };
 
 const generateAd = (avatar) => {
@@ -116,11 +115,11 @@ const generateAd = (avatar) => {
 
   return {
     author: {
-      avatar: 1,
+      avatar: avatar,
     },
     offer: {
       title: getRandomArrayElement(TITLES),
-      address: locationData.x + ', ' + locationData.y,
+      address: locationData.x + ', ' + locationData.y, // unexpected string concatenation (prefer-template)
       price: getRandomFloat(30000, 120000),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomFloat(1, 10),
@@ -139,8 +138,9 @@ const generateAd = (avatar) => {
 };
 
 const objectsArray = [];
+const avatarsArray = generateAvatarsArray();
 for (let i = 0; i < 10; i++) {
-  objectsArray[i] = generateAd();
+  objectsArray[i] = generateAd(avatarsArray[i]);
 }
 
 console.log(objectsArray);

@@ -119,7 +119,7 @@ const generateAd = (avatar) => {
     },
     offer: {
       title: getRandomArrayElement(TITLES),
-      address: location,
+      address: `${location.lat}, ${location.lng}`,
       price: getRandomFloat(30000, 120000),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomFloat(1, 10),

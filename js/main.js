@@ -91,20 +91,20 @@ const generateAvatarsArray = () => {
   const array = [];
 
   for (let i = 0; i < 10; i++) { // unexpected string concatenation (prefer-template)
-    array[i] = i < 9 ? 'img/avatars/user0' + (i + 1) + '.png' : 'img/avatars/user' + (i + 1) + '.png';
+    array[i] = i < 9 ? `img/avatars/user0${i + 1}.png` : `img/avatars/user${i + 1}.png`;
   }
 
   return shuffleArray(array);
 };
 
-const getMultipleStringsArray = (array) => {
+const getRandomArrayStrings = (array) => {
   const clonedArray = array.slice();
 
   shuffleArray(clonedArray);
 
   const arrayLength = getRandomFloat(1, clonedArray.length);
 
-  return clonedArray.slice(0, arrayLength); // return clonedArray = clonedArray.slice(0, arrayLength);
+  return clonedArray.slice(0, arrayLength);
 };
 
 const generateAd = (avatar) => {
@@ -119,16 +119,16 @@ const generateAd = (avatar) => {
     },
     offer: {
       title: getRandomArrayElement(TITLES),
-      address: locationData.x + ', ' + locationData.y, // unexpected string concatenation (prefer-template)
+      address: `${locationData.x}, ${locationData.y}`, // unexpected string concatenation (prefer-template)
       price: getRandomFloat(30000, 120000),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomFloat(1, 10),
       guests: getRandomFloat(1, 10),
       checking: getRandomArrayElement(TIMES),
       checkout: getRandomArrayElement(TIMES),
-      features: getMultipleStringsArray(FEATURES),
+      features: getRandomArrayStrings(FEATURES),
       description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getMultipleStringsArray(PHOTOS)
+      photos: getRandomArrayStrings(PHOTOS)
     },
     location: {
       lat: locationData.x,

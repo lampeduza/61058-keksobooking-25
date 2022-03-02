@@ -108,9 +108,9 @@ const getRandomArrayStrings = (array) => {
 };
 
 const generateAd = (avatar) => {
-  const locationData = {
-    x: getRandomFloat(35.65000, 35.70000, 5),
-    y: getRandomFloat(139.70000, 139.80000, 5)
+  const location = {
+    lat: getRandomFloat(35.65000, 35.70000, 5),
+    lng: getRandomFloat(139.70000, 139.80000, 5)
   };
 
   return {
@@ -119,7 +119,7 @@ const generateAd = (avatar) => {
     },
     offer: {
       title: getRandomArrayElement(TITLES),
-      address: `${locationData.x}, ${locationData.y}`, // unexpected string concatenation (prefer-template)
+      address: location,
       price: getRandomFloat(30000, 120000),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomFloat(1, 10),
@@ -130,10 +130,7 @@ const generateAd = (avatar) => {
       description: getRandomArrayElement(DESCRIPTIONS),
       photos: getRandomArrayStrings(PHOTOS)
     },
-    location: {
-      lat: locationData.x,
-      lng: locationData.y
-    }
+    location
   };
 };
 

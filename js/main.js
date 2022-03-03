@@ -73,7 +73,7 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
-const getRandomArrayElement = (elements) => elements[getRandomFloat(0, elements.length - 1)];
+const getRandomElement = (elements) => elements[getRandomFloat(0, elements.length - 1)];
 
 const shuffleArray = (array, length = array.length) => {
   for (let i = 0; i < length; i++) {
@@ -93,7 +93,7 @@ const getRandomElements = (array) => {
   return clonedArray.slice(0, arrayLength);
 };
 
-const generateAvatarsArray = () => {
+const generateAvatars = () => {
   const array = [];
 
   for (let i = 0; i < 10; i++) {
@@ -116,16 +116,16 @@ const generateAd = (avatar) => {
       avatar: avatar,
     },
     offer: {
-      title: getRandomArrayElement(TITLES),
+      title: getRandomElement(TITLES),
       address: `${location.lat}, ${location.lng}`,
       price: getRandomFloat(30000, 120000),
-      type: getRandomArrayElement(TYPES),
+      type: getRandomElement(TYPES),
       rooms: getRandomFloat(1, 10),
       guests: getRandomFloat(1, 10),
-      checking: getRandomArrayElement(TIMES),
-      checkout: getRandomArrayElement(TIMES),
+      checking: getRandomElement(TIMES),
+      checkout: getRandomElement(TIMES),
       features: getRandomElements(FEATURES),
-      description: getRandomArrayElement(DESCRIPTIONS),
+      description: getRandomElement(DESCRIPTIONS),
       photos: getRandomElements(PHOTOS)
     },
     location
@@ -133,7 +133,7 @@ const generateAd = (avatar) => {
 };
 
 const objectsArray = [];
-const avatarsArray = generateAvatarsArray();
+const avatarsArray = generateAvatars();
 for (let i = 0; i < 10; i++) {
   objectsArray[i] = generateAd(avatarsArray[i]);
 }

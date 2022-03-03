@@ -75,36 +75,34 @@ const PHOTOS = [
 
 const getRandomArrayElement = (elements) => elements[getRandomFloat(0, elements.length - 1)];
 
-const shuffleArray = (array) => {
-  for (let i = 0; i <= array.length - 1; i++) {
+const shuffleArray = (array, length = array.length) => {
+  for (let i = 0; i < length; i++) {
     const index = getRandomFloat(0, array.length - 1);
     const swap = array[i];
 
     array[i] = array[index];
     array[index] = swap;
   }
+};
 
-  return array;
+const getRandomElements = (array) => {
+  const clonedArray = array.slice();
+  const arrayLength = getRandomFloat(1, clonedArray.length);
+  shuffleArray(clonedArray, arrayLength);
+
+  return clonedArray.slice(0, arrayLength);
 };
 
 const generateAvatarsArray = () => {
   const array = [];
 
-  for (let i = 0; i < 10; i++) { // unexpected string concatenation (prefer-template)
+  for (let i = 0; i < 10; i++) {
     array[i] = i < 9 ? `img/avatars/user0${i + 1}.png` : `img/avatars/user${i + 1}.png`;
   }
 
-  return shuffleArray(array);
-};
+  shuffleArray(array);
 
-const getRandomArrayStrings = (array) => {
-  const clonedArray = array.slice();
-
-  shuffleArray(clonedArray);
-
-  const arrayLength = getRandomFloat(1, clonedArray.length);
-
-  return clonedArray.slice(0, arrayLength);
+  return array;
 };
 
 const generateAd = (avatar) => {
@@ -126,9 +124,9 @@ const generateAd = (avatar) => {
       guests: getRandomFloat(1, 10),
       checking: getRandomArrayElement(TIMES),
       checkout: getRandomArrayElement(TIMES),
-      features: getRandomArrayStrings(FEATURES),
+      features: getRandomElements(FEATURES),
       description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getRandomArrayStrings(PHOTOS)
+      photos: getRandomElements(PHOTOS)
     },
     location
   };

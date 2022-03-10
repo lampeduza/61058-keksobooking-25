@@ -1,6 +1,7 @@
 import {getRandomFloat, getRandomElement, getRandomElements} from './util.js';
 import {shuffleArray} from './sort.js';
 import {getObjectsArray, TITLES} from './data.js'; // На время импортировал массив TITLES для вызова функций в main.js
+import {generateAds} from './ads.js';
 
 getObjectsArray();
 
@@ -12,3 +13,4 @@ getRandomFloat(1, 5, 5);
 getRandomElement(TITLES);
 getRandomElements(TITLES);
 shuffleArray(TITLES);
+

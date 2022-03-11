@@ -65,26 +65,37 @@ const generateAds = () => {
 		const adCapacity = ad.querySelector('.popup__text--capacity').textContent = similarAds[i].offer.rooms + ' ' +  getRightRoomsPronunciation() + ' для ' + similarAds[i].offer.guests + ' ' + getRightGuestsPronunciation();
 		const adTime = ad.querySelector('.popup__text--time').textContent = 'Заезд после ' + similarAds[i].offer.checking + ', выезд до ' + similarAds[i].offer.checkout;
 
-		// Наверное, нужна отдельная функция? Сделать так, чтобы генерировалось сразу несколько features, но как?
-		const adFeaturesList = ad.querySelector('.popup__features');
-		adFeaturesList.innerHTML = '';
-		const featureElement = document.createElement('li');
-		featureElement.classList.add('popup__feature', 'popup__feature--' + similarAds[i].offer.features[i]);
-		adFeaturesList.appendChild(featureElement);
+		// Нужно как - то сгенерировать рандомное количество элементов списка
+		// Понять, как вынести эту функцию в глобальную область видимости
+		const adFeatures = () => {
+			const adFeaturesList = ad.querySelector('.popup__features');
 
+			// Удаляю элементы списка
+			for (let i = adFeaturesList.children.length - 1; i >= 0; i--) {
+				const child = adFeaturesList.children[i];
+				child.parentElement.removeChild(child);
+			}
+
+			const adFeaturesElement = document.createElement('li');
+			adFeaturesElement.classList.add('popup__feature', 'popup__feature--' + similarAds[i].offer.features[i]);
+			const clonedElement = adFeaturesElement.cloneNode(true);
+			adFeaturesList.appendChild(clonedElement);
+		};
+
+		adFeatures();
+
+		const createImages = () => {
+			const adPhotosList = ad.querySelector('.popup__photos');
+			const adPhotosImage = adPhotosList.querySelector('.popup__photo');
+			const clonedImage = adPhotosImage.cloneNode(true);
+			adPhotosImage.remove();
+			clonedImage.src = similarAds[i].offer.photos[i];
+			adPhotosList.appendChild(clonedImage);
+		};
+
+		createImages();
+		
 		const adDescription = ad.querySelector('.popup__description').textContent = similarAds[i].offer.description;
-
-		// Подумать над отдельной функцией, которая будет создавать и вставлять изображения в контейнер на подобие features
-		const adPhotosList = ad.querySelector('.popup__photos');
-		adPhotosList.innerHTML = '';
-		const adPhotosElement = document.createElement('img');
-		adPhotosElement.classList.add('popup__photo');
-		adPhotosElement.width = 45;
-		adPhotosElement.height = 40;
-		adPhotosElement.alt = 'Фотография жилья';
-		adPhotosElement.src = similarAds[i].offer.photos[i];
-		adPhotosList.appendChild(adPhotosElement);
-
 		const adAvatar = ad.querySelector('.popup__avatar').src = similarAds[i].author.avatar;
 
 	}

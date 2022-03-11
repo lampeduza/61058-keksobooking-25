@@ -17,40 +17,52 @@ console.log(similarAds);
 // Создал document fragment
 const documentFragment = document.createDocumentFragment();
 
-const switchEngToRus = (array) => {
-  for (let i = 0; i <= array.length - 1; i++) {
-    if (similarAds[i].offer.type === 'palace') {
-      return 'Дворец';
-    } else if (similarAds[i].offer.type === 'flat') {
-      return 'Квартира';
-    } else if (similarAds[i].offer.type === 'house') {
-      return 'Дом';
-    } else if (similarAds[i].offer.type === 'bungalow') {
-      return 'Бунгало';
-    } else {
-     	return 'Отель';
-    }
-  }
-};
 
-switchEngToRus(TYPES);
-
-// Функция для генерации похожих объявлений
 const generateAds = () => {
 	const ad = adTemplate.cloneNode(true);
 
 	for (let i = 0; i <= similarAds.length - 1; i++) {
+
+		// Понять, как вынести эту функцию в глобальную область видимости
+		const switchEngToRus = (array) => {
+    	if (similarAds[i].offer.type === 'palace') {
+      	return 'Дворец';
+    	} else if (similarAds[i].offer.type === 'flat') {
+      	return 'Квартира';
+    	} else if (similarAds[i].offer.type === 'house') {
+      	return 'Дом';
+    	} else if (similarAds[i].offer.type === 'bungalow') {
+      	return 'Бунгало';
+    	} else {
+     		return 'Отель';
+    	}
+		};
+
+		// Понять, как вынести эту функцию в глобальную область видимости
+		const getRightRoomsPronunciation = () => {
+    	if (similarAds[i].offer.rooms === 1) {
+    		return 'комната';
+    	} else if (similarAds[i].offer.rooms <= 4) {
+    		return 'комнаты';
+    	} else {
+    		return 'комнат';
+    	}
+		};
+
+		// Понять, как вынести эту функцию в глобальную область видимости
+		const getRightGuestsPronunciation = () => {
+    	if (similarAds[i].offer.guests === 1) {
+    		return 'гостя';
+    	} else if (similarAds[i].offer.guests > 1) {
+    		return 'гостей';
+    	}
+		};
+
 		const adTitle = ad.querySelector('.popup__title').textContent = similarAds[i].offer.title;
 		const adAddress = ad.querySelector('.popup__text--address').textContent = similarAds[i].offer.address;
 		const adPrice = ad.querySelector('.popup__text--price').innerHTML = similarAds[i].offer.price + ' <span>₽/ночь</span>';
-
-		// !!!!! Придумать функцию, которая будет подставлять русский вариант вместо английского
 		const adType = ad.querySelector('.popup__type').textContent = switchEngToRus(TYPES);
-		console.log(adType);
-
-		// Подумать над функцией, которая будет правильно склонять
-		const adCapacity = ad.querySelector('.popup__text--capacity').textContent = similarAds[i].offer.rooms + ' комнаты для ' + similarAds[i].offer.guests + ' гостей';
-
+		const adCapacity = ad.querySelector('.popup__text--capacity').textContent = similarAds[i].offer.rooms + ' ' +  getRightRoomsPronunciation() + ' для ' + similarAds[i].offer.guests + ' ' + getRightGuestsPronunciation();
 		const adTime = ad.querySelector('.popup__text--time').textContent = 'Заезд после ' + similarAds[i].offer.checking + ', выезд до ' + similarAds[i].offer.checkout;
 
 		// Наверное, нужна отдельная функция? Сделать так, чтобы генерировалось сразу несколько features, но как?

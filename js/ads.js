@@ -17,6 +17,24 @@ console.log(similarAds);
 // Создал document fragment
 const documentFragment = document.createDocumentFragment();
 
+const switchEngToRus = (array) => {
+  for (let i = 0; i <= array.length - 1; i++) {
+    if (similarAds[i].offer.type === 'palace') {
+      return 'Дворец';
+    } else if (similarAds[i].offer.type === 'flat') {
+      return 'Квартира';
+    } else if (similarAds[i].offer.type === 'house') {
+      return 'Дом';
+    } else if (similarAds[i].offer.type === 'bungalow') {
+      return 'Бунгало';
+    } else {
+     	return 'Отель';
+    }
+  }
+};
+
+switchEngToRus(TYPES);
+
 // Функция для генерации похожих объявлений
 const generateAds = () => {
 	const ad = adTemplate.cloneNode(true);
@@ -24,12 +42,10 @@ const generateAds = () => {
 	for (let i = 0; i <= similarAds.length - 1; i++) {
 		const adTitle = ad.querySelector('.popup__title').textContent = similarAds[i].offer.title;
 		const adAddress = ad.querySelector('.popup__text--address').textContent = similarAds[i].offer.address;
-
-		// Подумать над другим решением, чтобы не перезаписывать <span></span>
 		const adPrice = ad.querySelector('.popup__text--price').innerHTML = similarAds[i].offer.price + ' <span>₽/ночь</span>';
 
 		// !!!!! Придумать функцию, которая будет подставлять русский вариант вместо английского
-		const adType = ad.querySelector('.popup__type');
+		const adType = ad.querySelector('.popup__type').textContent = switchEngToRus(TYPES);
 		console.log(adType);
 
 		// Подумать над функцией, которая будет правильно склонять

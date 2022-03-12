@@ -78,10 +78,12 @@ const generateAds = () => {
 				child.parentElement.removeChild(child);
 			}
 
-			const adFeaturesElement = document.createElement('li');
-			adFeaturesElement.classList.add('popup__feature', 'popup__feature--' + similarAds[i].offer.features[i]);
-			const clonedElement = adFeaturesElement.cloneNode(true);
-			adFeaturesList.appendChild(clonedElement);
+			for (let j = 0; j <= similarAds[i].offer.features.length - 1; j++) {
+				const adFeaturesElement = document.createElement('li');
+				adFeaturesElement.classList.add('popup__feature', 'popup__feature--' + similarAds[i].offer.features[j]);
+				const clonedElement = adFeaturesElement.cloneNode(true);
+				adFeaturesList.appendChild(clonedElement);
+			}
 		};
 
 		adFeatures();

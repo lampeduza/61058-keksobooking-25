@@ -14,3 +14,6 @@ getRandomElement(TITLES);
 getRandomElements(TITLES);
 shuffleArray(TITLES);
 
+
+// Вызов ads.js
+generateAds();

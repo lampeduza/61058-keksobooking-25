@@ -68,7 +68,7 @@ const generateAds = () => {
 
       for (let j = 0; j <= similarAds[i].offer.features.length - 1; j++) {
         const adFeaturesElement = document.createElement('li');
-        adFeaturesElement.classList.add('popup__feature', 'popup__feature--' + similarAds[i].offer.features[j]);
+        adFeaturesElement.classList.add('popup__feature', `popup__feature--${similarAds[i].offer.features[j]}`);
         const clonedElement = adFeaturesElement.cloneNode(true);
         adFeaturesList.appendChild(clonedElement);
       }
@@ -88,14 +88,14 @@ const generateAds = () => {
       adPhotosImage.remove();
     };
 
-    const adTitle = ad.querySelector('.popup__title').textContent = similarAds[i].offer.title;
-    const adAddress = ad.querySelector('.popup__text--address').textContent = similarAds[i].offer.address;
-    const adPrice = ad.querySelector('.popup__text--price').innerHTML = similarAds[i].offer.price + ' <span>₽/ночь</span>';
-    const adType = ad.querySelector('.popup__type').textContent = switchEngToRus();
-    const adCapacity = ad.querySelector('.popup__text--capacity').textContent = similarAds[i].offer.rooms + ' ' +  getRightRoomsPronunciation() + ' для ' + similarAds[i].offer.guests + ' ' + getRightGuestsPronunciation();
-    const adTime = ad.querySelector('.popup__text--time').textContent = 'Заезд после ' + similarAds[i].offer.checking + ', выезд до ' + similarAds[i].offer.checkout;
-    const adDescription = ad.querySelector('.popup__description').textContent = similarAds[i].offer.description;
-    const adAvatar = ad.querySelector('.popup__avatar').src = similarAds[i].author.avatar;
+    ad.querySelector('.popup__title').textContent = similarAds[i].offer.title;
+    ad.querySelector('.popup__text--address').textContent = similarAds[i].offer.address;
+    ad.querySelector('.popup__text--price').innerHTML = `${similarAds[i].offer.price} <span>₽/ночь</span>`;
+    ad.querySelector('.popup__type').textContent = switchEngToRus();
+    ad.querySelector('.popup__text--capacity').textContent = `${similarAds[i].offer.rooms}  ${getRightRoomsPronunciation()} для ${similarAds[i].offer.guests} ${getRightGuestsPronunciation()}`;
+    ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAds[i].offer.checking} , выезд до ${similarAds[i].offer.checkout}`;
+    ad.querySelector('.popup__description').textContent = similarAds[i].offer.description;
+    ad.querySelector('.popup__avatar').src = similarAds[i].author.avatar;
     adFeatures();
     createImages();
   }
@@ -103,7 +103,5 @@ const generateAds = () => {
   adsList.appendChild(ad);
   return adsList;
 };
-
-generateAds();
 
 export {generateAds};

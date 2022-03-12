@@ -1,4 +1,4 @@
-import {getObjectsArray, TYPES} from './data.js';
+import {getObjectsArray} from './data.js';
 
 // Нашел блок с картой
 const map = document.querySelector('.map');
@@ -78,8 +78,6 @@ const generateAds = () => {
     const createImages = () => {
       const adPhotosList = ad.querySelector('.popup__photos');
       const adPhotosImage = adPhotosList.querySelector('.popup__photo');
-      const clonedImage = adPhotosImage.cloneNode(true);
-      adPhotosImage.remove();
 
       for (let j = 0; j <= similarAds[i].offer.photos.length - 1; j++) {
         const clonedImage = adPhotosImage.cloneNode(true);

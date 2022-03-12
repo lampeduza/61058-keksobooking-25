@@ -100,4 +100,4 @@ const getObjectsArray = () => {
 };
 
 // На время экспортировал массив TITLES для вызова функций в main.js
-export {getObjectsArray, TITLES, TYPES};
+export {getObjectsArray, TITLES};

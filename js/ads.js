@@ -64,6 +64,8 @@ const generateAds = () => {
 		const adType = ad.querySelector('.popup__type').textContent = switchEngToRus(TYPES);
 		const adCapacity = ad.querySelector('.popup__text--capacity').textContent = similarAds[i].offer.rooms + ' ' +  getRightRoomsPronunciation() + ' для ' + similarAds[i].offer.guests + ' ' + getRightGuestsPronunciation();
 		const adTime = ad.querySelector('.popup__text--time').textContent = 'Заезд после ' + similarAds[i].offer.checking + ', выезд до ' + similarAds[i].offer.checkout;
+		const adDescription = ad.querySelector('.popup__description').textContent = similarAds[i].offer.description;
+		const adAvatar = ad.querySelector('.popup__avatar').src = similarAds[i].author.avatar;
 
 		// Нужно как - то сгенерировать рандомное количество элементов списка
 		// Понять, как вынести эту функцию в глобальную область видимости
@@ -89,14 +91,17 @@ const generateAds = () => {
 			const adPhotosImage = adPhotosList.querySelector('.popup__photo');
 			const clonedImage = adPhotosImage.cloneNode(true);
 			adPhotosImage.remove();
-			clonedImage.src = similarAds[i].offer.photos[i];
-			adPhotosList.appendChild(clonedImage);
+
+			for (let j = 0; j <= similarAds[i].offer.photos.length - 1; j++) {
+				const clonedImage = adPhotosImage.cloneNode(true);
+				clonedImage.src = similarAds[i].offer.photos[j];
+				adPhotosList.appendChild(clonedImage);
+			}
+
+			adPhotosImage.remove();
 		};
 
 		createImages();
-		
-		const adDescription = ad.querySelector('.popup__description').textContent = similarAds[i].offer.description;
-		const adAvatar = ad.querySelector('.popup__avatar').src = similarAds[i].author.avatar;
 
 	}
 

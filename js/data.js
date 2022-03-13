@@ -88,16 +88,16 @@ const generateAd = (avatar) => {
 };
 
 
-const getObjectsArray = () => {
-  const objectsArray = [];
+const getObjects = () => {
+  const objects = [];
   const avatarsArray = generateAvatars();
 
   for (let i = 0; i < 10; i++) {
-    objectsArray[i] = generateAd(avatarsArray[i]);
+    objects[i] = generateAd(avatarsArray[i]);
   }
 
-  return objectsArray;
+  return objects;
 };
 
 // На время экспортировал массив TITLES для вызова функций в main.js
-export {getObjectsArray, TITLES};
+export {getObjects};

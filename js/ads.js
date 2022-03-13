@@ -85,8 +85,8 @@ const adsListFragment = document.createDocumentFragment();
 
 const generateAds = () => {
   const ad = adTemplate.cloneNode(true);
-  
-  for (let similarAd of similarAds) {
+
+  for (const similarAd of similarAds) {
     ad.querySelector('.popup__title').textContent = similarAd.offer.title;
     ad.querySelector('.popup__text--address').textContent = similarAd.offer.address;
     ad.querySelector('.popup__text--price').innerHTML = `${similarAd.offer.price} <span>₽/ночь</span>`;

@@ -77,7 +77,7 @@ const renderAd = (similarAd) => {
   const ad = adTemplate.cloneNode(true);
   ad.querySelector('.popup__title').textContent = similarAd.offer.title;
   ad.querySelector('.popup__text--address').textContent = similarAd.offer.address;
-  
+
   const price = ad.querySelector('.popup__text--price');
   price.textContent = `${similarAd.offer.price}`;
   const currency = document.createElement('span');

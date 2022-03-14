@@ -1,4 +1,6 @@
-import {generateAds, similarAds} from './ads.js';
+import {getObjects} from './data.js';
+import {renderAd} from './ads.js';
 
-// Вызов ads.js
-generateAds(similarAds);
+const ads = getObjects();
+
+renderAd(ads[0]);

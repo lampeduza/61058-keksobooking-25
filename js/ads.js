@@ -1,5 +1,3 @@
-import {getObjects} from './data.js';
-
 const map = document.querySelector('.map');
 
 const adsList = map.querySelector('.map__canvas');
@@ -7,8 +5,6 @@ const adsList = map.querySelector('.map__canvas');
 const adTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
-
-const similarAds = getObjects();
 
 const addFeatures = (ad, similarAd) => {
   const adFeaturesList = ad.querySelector('.popup__features');
@@ -19,9 +15,9 @@ const addFeatures = (ad, similarAd) => {
     adFeaturesList.firstChild.remove();
   }
 
-  for (let j = 0; j <= similarAd.offer.features.length - 1; j++) {
+  for (const feature of similarAd.offer.features) {
     const adFeaturesElement = document.createElement('li');
-    adFeaturesElement.classList.add('popup__feature', `popup__feature--${similarAd.offer.features[j]}`);
+    adFeaturesElement.classList.add('popup__feature', `popup__feature--${feature}`);
     const clonedElement = adFeaturesElement.cloneNode(true);
     featuresListFragment.appendChild(clonedElement);
   }
@@ -29,7 +25,7 @@ const addFeatures = (ad, similarAd) => {
   adFeaturesList.appendChild(featuresListFragment);
 };
 
-const switchEngToRus = (ad, similarAd) => {
+const switchEngToRus = (similarAd) => {
   const russianDictionary = {
     palace: 'Дворец',
     flat: 'Квартира',
@@ -41,7 +37,7 @@ const switchEngToRus = (ad, similarAd) => {
   return russianDictionary[similarAd.offer.type];
 };
 
-const getRightRoomsPronunciation = (ad, similarAd) => {
+const getRightRoomsPronunciation = (similarAd) => {
   if (similarAd.offer.rooms === 1) {
     return 'комната';
   } else if (similarAd.offer.rooms <= 4) {
@@ -51,7 +47,7 @@ const getRightRoomsPronunciation = (ad, similarAd) => {
   }
 };
 
-const getRightGuestsPronunciation = (ad, similarAd) => {
+const getRightGuestsPronunciation = (similarAd) => {
   if (similarAd.offer.guests === 1) {
     return 'гостя';
   } else if (similarAd.offer.guests > 1) {
@@ -65,9 +61,9 @@ const createImages = (ad, similarAd) => {
 
   const imagesListFragment = document.createDocumentFragment();
 
-  for (let j = 0; j <= similarAd.offer.photos.length - 1; j++) {
+  for (const photo of similarAd.offer.photos) {
     const clonedImage = adPhotosImage.cloneNode(true);
-    clonedImage.src = similarAd.offer.photos[j];
+    clonedImage.src = photo;
     imagesListFragment.appendChild(clonedImage);
   }
 
@@ -75,25 +71,29 @@ const createImages = (ad, similarAd) => {
   adPhotosList.appendChild(imagesListFragment);
 };
 
-const generateAds = (ads) => {
+const renderAd = (similarAd) => {
   const adsListFragment = document.createDocumentFragment();
 
-  for (const similarAd of ads) {
-    const ad = adTemplate.cloneNode(true);
-    ad.querySelector('.popup__title').textContent = similarAd.offer.title;
-    ad.querySelector('.popup__text--address').textContent = similarAd.offer.address;
-    ad.querySelector('.popup__text--price').innerHTML = `${similarAd.offer.price} <span>₽/ночь</span>`;
-    ad.querySelector('.popup__type').textContent = switchEngToRus(ad, similarAd);
-    ad.querySelector('.popup__text--capacity').textContent = `${similarAd.offer.rooms}  ${getRightRoomsPronunciation(ad, similarAd)} для ${similarAd.offer.guests} ${getRightGuestsPronunciation(ad, similarAd)}`;
-    ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAd.offer.checking} , выезд до ${similarAd.offer.checkout}`;
-    ad.querySelector('.popup__description').textContent = similarAd.offer.description;
-    ad.querySelector('.popup__avatar').src = similarAd.author.avatar;
-    addFeatures(ad, similarAd);
-    createImages(ad, similarAd);
-    adsListFragment.appendChild(ad);
-  }
+  const ad = adTemplate.cloneNode(true);
+  ad.querySelector('.popup__title').textContent = similarAd.offer.title;
+  ad.querySelector('.popup__text--address').textContent = similarAd.offer.address;
 
-  adsList.appendChild(adsListFragment.children[0]);
+  const price = ad.querySelector('.popup__text--price');
+  price.textContent = `${similarAd.offer.price}`;
+  const currency = document.createElement('span');
+  currency.textContent = ' ₽/ночь';
+  price.appendChild(currency);
+
+  ad.querySelector('.popup__type').textContent = switchEngToRus(similarAd);
+  ad.querySelector('.popup__text--capacity').textContent = `${similarAd.offer.rooms}  ${getRightRoomsPronunciation(similarAd)} для ${similarAd.offer.guests} ${getRightGuestsPronunciation(similarAd)}`;
+  ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAd.offer.checking} , выезд до ${similarAd.offer.checkout}`;
+  ad.querySelector('.popup__description').textContent = similarAd.offer.description;
+  ad.querySelector('.popup__avatar').src = similarAd.author.avatar;
+  addFeatures(ad, similarAd);
+  createImages(ad, similarAd);
+  adsListFragment.appendChild(ad);
+
+  adsList.appendChild(adsListFragment);
 };
 
-export {generateAds, similarAds};
+export {renderAd};

@@ -24,6 +24,8 @@ const disableInterface = () => {
 	slider.disabled = true;
 }
 
+disableInterface();
+
 // ENABLE INTERFACE
 const enableInterface = () => {
 	const filtersForm = document.querySelector('.map__filters');
@@ -42,5 +44,7 @@ const enableInterface = () => {
 	slider.classList.remove('ad-form__slider--disabled');
 	slider.disabled = false;
 };
+
+enableInterface();
 
 export {disableInterface, enableInterface};

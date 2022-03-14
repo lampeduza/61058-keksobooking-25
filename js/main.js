@@ -5,5 +5,5 @@ import {disableInterface, enableInterface} from './form.js';
 generateAds(similarAds);
 
 // Вызов form.js
-disableInterface();
+//disableInterface();
 //enableInterface();

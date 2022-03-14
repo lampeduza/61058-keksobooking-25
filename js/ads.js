@@ -1,22 +1,15 @@
-import {getObjectsArray} from './data.js';
+import {getObjects} from './data.js';
 
-// Нашел блок с картой
 const map = document.querySelector('.map');
-
-// Нашел блок для вставки объявлений
 const adsList = map.querySelector('.map__canvas');
-
-// Нашел шаблон объявления
 const adTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
+const similarAds = getObjects();
 
-const similarAds = getObjectsArray();
-
-// Создал document fragment для adFeatures
 const featuresListFragment = document.createDocumentFragment();
 
-const adFeatures = (ad, similarAd) => {
+const addFeatures = (ad, similarAd) => {
   const adFeaturesList = ad.querySelector('.popup__features');
 
   while (adFeaturesList.firstChild) {
@@ -63,7 +56,6 @@ const getRightGuestsPronunciation = (ad, similarAd) => {
   }
 };
 
-// Создал document fragment для createImages
 const imagesListFragment = document.createDocumentFragment();
 
 const createImages = (ad, similarAd) => {
@@ -80,7 +72,6 @@ const createImages = (ad, similarAd) => {
   adPhotosList.appendChild(imagesListFragment);
 };
 
-// Создал document fragment для generateAds
 const adsListFragment = document.createDocumentFragment();
 
 const generateAds = () => {
@@ -95,7 +86,7 @@ const generateAds = () => {
     ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAd.offer.checking} , выезд до ${similarAd.offer.checkout}`;
     ad.querySelector('.popup__description').textContent = similarAd.offer.description;
     ad.querySelector('.popup__avatar').src = similarAd.author.avatar;
-    adFeatures(ad, similarAd);
+    addFeatures(ad, similarAd);
     createImages(ad, similarAd);
   }
 

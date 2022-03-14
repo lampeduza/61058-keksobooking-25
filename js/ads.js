@@ -1,16 +1,19 @@
 import {getObjects} from './data.js';
 
 const map = document.querySelector('.map');
+
 const adsList = map.querySelector('.map__canvas');
+
 const adTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
-const similarAds = getObjects();
 
-const featuresListFragment = document.createDocumentFragment();
+const similarAds = getObjects();
 
 const addFeatures = (ad, similarAd) => {
   const adFeaturesList = ad.querySelector('.popup__features');
+
+  const featuresListFragment = document.createDocumentFragment();
 
   while (adFeaturesList.firstChild) {
     adFeaturesList.firstChild.remove();
@@ -56,11 +59,11 @@ const getRightGuestsPronunciation = (ad, similarAd) => {
   }
 };
 
-const imagesListFragment = document.createDocumentFragment();
-
 const createImages = (ad, similarAd) => {
   const adPhotosList = ad.querySelector('.popup__photos');
   const adPhotosImage = adPhotosList.querySelector('.popup__photo');
+
+  const imagesListFragment = document.createDocumentFragment();
 
   for (let j = 0; j <= similarAd.offer.photos.length - 1; j++) {
     const clonedImage = adPhotosImage.cloneNode(true);
@@ -72,12 +75,11 @@ const createImages = (ad, similarAd) => {
   adPhotosList.appendChild(imagesListFragment);
 };
 
-const adsListFragment = document.createDocumentFragment();
+const generateAds = (ads) => {
+  const adsListFragment = document.createDocumentFragment();
 
-const generateAds = () => {
-  const ad = adTemplate.cloneNode(true);
-
-  for (const similarAd of similarAds) {
+  for (const similarAd of ads) {
+    const ad = adTemplate.cloneNode(true);
     ad.querySelector('.popup__title').textContent = similarAd.offer.title;
     ad.querySelector('.popup__text--address').textContent = similarAd.offer.address;
     ad.querySelector('.popup__text--price').innerHTML = `${similarAd.offer.price} <span>₽/ночь</span>`;
@@ -88,10 +90,10 @@ const generateAds = () => {
     ad.querySelector('.popup__avatar').src = similarAd.author.avatar;
     addFeatures(ad, similarAd);
     createImages(ad, similarAd);
+    adsListFragment.appendChild(ad);
   }
 
-  adsListFragment.appendChild(ad);
-  adsList.appendChild(adsListFragment);
+  adsList.appendChild(adsListFragment.children[0]);
 };
 
-export {generateAds};
+export {generateAds, similarAds};

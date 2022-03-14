@@ -92,7 +92,7 @@ const getObjects = () => {
   const objects = [];
   const avatarsArray = generateAvatars();
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 10; i++) {
     objects[i] = generateAd(avatarsArray[i]);
   }
 
@@ -100,4 +100,4 @@ const getObjects = () => {
 };
 
 // На время экспортировал массив TITLES для вызова функций в main.js
-export {getObjects, TITLES};
+export {getObjects};

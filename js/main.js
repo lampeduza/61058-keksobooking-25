@@ -1,9 +1,6 @@
-import {generateAds, similarAds} from './ads.js';
-import {disableInterface, enableInterface} from './form.js';
+import {getObjects} from './data.js';
+import {renderAd} from './ads.js';
 
-// Вызов ads.js
-generateAds(similarAds);
+const ads = getObjects();
 
-// Вызов form.js
-//disableInterface();
-//enableInterface();
+renderAd(ads[0]);

@@ -1,66 +1,28 @@
-// В задаче пишут, что (все пункты должны быть заблокированы, кроме первого, про карту) как это понимать?
-
-// DISABLE INTERFACE
-const disableInterface = () => {
+const changeInterfaceState = (enabled) => {
   const forms = document.forms;
 
   for (const form of forms) {
-    if (form.classList.contains('map__filters')) {
-      form.classList.add('map__filters--disabled');
+    for (const element of form.children) {
+      element.disabled = enabled;
     }
+
+    if (form.classList.contains('map__filters')) {
+      form.classList.toggle('map__filters--disabled', enabled);
+      continue;
+    };
 
     if (form.classList.contains('ad-form')) {
-      form.classList.add('ad-form--disabled');
+      form.classList.toggle('ad-form--disabled', enabled);
+
+      const slider = form.querySelector('.ad-form__slider');
+      slider.classList.toggle('ad-form__slider--disabled', enabled);
+      slider.disabled = enabled;
+      continue;
     }
   }
-
-  const filterFormElements = forms[0].children;
-
-  for (const filterFormElement of filterFormElements) {
-    filterFormElement.disabled = true;
-  }
-
-  const adFormElements = forms[1].children;
-
-  for (const adFormElement of adFormElements) {
-    adFormElement.disabled = false;
-  }
-
-  const slider = forms[1].querySelector('.ad-form__slider');
-  slider.classList.add('ad-form__slider--disabled');
-  slider.disabled = true;
 };
 
-
-/// DISABLE INTERFACE
-const enableInterface = () => {
-  const forms = document.forms;
-
-  for (const form of forms) {
-    if (form.classList.contains('map__filters')) {
-      form.classList.remove('map__filters--disabled');
-    }
-
-    if (form.classList.contains('ad-form')) {
-      form.classList.remove('ad-form--disabled');
-    }
-  }
-
-  const filterFormElements = forms[0].children;
-
-  for (const filterFormElement of filterFormElements) {
-    filterFormElement.disabled = false;
-  }
-
-  const adFormElements = forms[1].children;
-
-  for (const adFormElement of adFormElements) {
-    adFormElement.disabled = false;
-  }
-
-  const slider = forms[1].querySelector('.ad-form__slider');
-  slider.classList.remove('ad-form__slider--disabled');
-  slider.disabled = false;
-};
+const enableInterface = () => changeInterfaceState(false);
+const disableInterface = () => changeInterfaceState(true);
 
 export {disableInterface, enableInterface};

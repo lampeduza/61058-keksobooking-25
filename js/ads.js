@@ -83,21 +83,7 @@ const renderAd = (similarAd) => {
   ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAd.offer.checking} , выезд до ${similarAd.offer.checkout}`;
   ad.querySelector('.popup__description').textContent = similarAd.offer.description;
   ad.querySelector('.popup__avatar').src = similarAd.author.avatar;
-  addFeatures(ad, similarAd);
-  createImages(ad, similarAd);
-  adsListFragment.appendChild(ad);
-
-  const price = ad.querySelector('.popup__text--price');
-  price.textContent = `${similarAd.offer.price}`;
-  const currency = document.createElement('span');
-  currency.textContent = ' ₽/ночь';
-  price.appendChild(currency);
-
-  ad.querySelector('.popup__type').textContent = switchEngToRus(similarAd);
-  ad.querySelector('.popup__text--capacity').textContent = `${similarAd.offer.rooms}  ${getRightRoomsPronunciation(similarAd)} для ${similarAd.offer.guests} ${getRightGuestsPronunciation(similarAd)}`;
-  ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAd.offer.checking} , выезд до ${similarAd.offer.checkout}`;
-  ad.querySelector('.popup__description').textContent = similarAd.offer.description;
-  ad.querySelector('.popup__avatar').src = similarAd.author.avatar;
+  ad.querySelector('.popup__text--price').firstChild.textContent = `${similarAd.offer.price} `;
   addFeatures(ad, similarAd);
   createImages(ad, similarAd);
   adsListFragment.appendChild(ad);

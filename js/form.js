@@ -14,13 +14,16 @@ const disableInterface = () => {
     }
   }
 
-  const filterFormFeaturesList = forms[0].querySelector('.map__features');
-  filterFormFeaturesList.disabled = true;
-
   const filterFormElements = forms[0].children;
 
   for (const filterFormElement of filterFormElements) {
     filterFormElement.disabled = true;
+  }
+
+  const adFormElements = forms[1].children;
+
+  for (const adFormElement of adFormElements) {
+    adFormElement.disabled = false;
   }
 
   const slider = forms[1].querySelector('.ad-form__slider');
@@ -49,7 +52,7 @@ const enableInterface = () => {
     filterFormElement.disabled = false;
   }
 
-  const adFormElements = forms[1].querySelectorAll('fieldset');
+  const adFormElements = forms[1].children;
 
   for (const adFormElement of adFormElements) {
     adFormElement.disabled = false;

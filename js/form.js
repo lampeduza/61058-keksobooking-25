@@ -9,7 +9,7 @@ const changeInterfaceState = (enabled) => {
     if (form.classList.contains('map__filters')) {
       form.classList.toggle('map__filters--disabled', enabled);
       continue;
-    };
+    }
 
     if (form.classList.contains('ad-form')) {
       form.classList.toggle('ad-form--disabled', enabled);

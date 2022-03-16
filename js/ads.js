@@ -83,6 +83,7 @@ const renderAd = (similarAd) => {
   ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAd.offer.checking} , выезд до ${similarAd.offer.checkout}`;
   ad.querySelector('.popup__description').textContent = similarAd.offer.description;
   ad.querySelector('.popup__avatar').src = similarAd.author.avatar;
+  ad.querySelector('.popup__text--price').firstChild.textContent = `${similarAd.offer.price} `;
   addFeatures(ad, similarAd);
   createImages(ad, similarAd);
   adsListFragment.appendChild(ad);

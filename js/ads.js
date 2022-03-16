@@ -1,14 +1,11 @@
 const map = document.querySelector('.map');
-
 const adsList = map.querySelector('.map__canvas');
-
 const adTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
 const addFeatures = (ad, similarAd) => {
   const adFeaturesList = ad.querySelector('.popup__features');
-
   const featuresListFragment = document.createDocumentFragment();
 
   while (adFeaturesList.firstChild) {
@@ -58,7 +55,6 @@ const getRightGuestsPronunciation = (similarAd) => {
 const createImages = (ad, similarAd) => {
   const adPhotosList = ad.querySelector('.popup__photos');
   const adPhotosImage = adPhotosList.querySelector('.popup__photo');
-
   const imagesListFragment = document.createDocumentFragment();
 
   for (const photo of similarAd.offer.photos) {
@@ -73,7 +69,6 @@ const createImages = (ad, similarAd) => {
 
 const renderAd = (similarAd) => {
   const adsListFragment = document.createDocumentFragment();
-
   const ad = adTemplate.cloneNode(true);
   ad.querySelector('.popup__title').textContent = similarAd.offer.title;
   ad.querySelector('.popup__text--address').textContent = similarAd.offer.address;
@@ -87,7 +82,6 @@ const renderAd = (similarAd) => {
   addFeatures(ad, similarAd);
   createImages(ad, similarAd);
   adsListFragment.appendChild(ad);
-
   adsList.appendChild(adsListFragment);
 };
 

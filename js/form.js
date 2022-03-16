@@ -10,15 +10,15 @@ const changeInterfaceState = (enabled) => {
       form.classList.toggle('map__filters--disabled', enabled);
       continue;
     }
-  }
 
-  if (form.classList.contains('ad-form')) {
-    form.classList.toggle('ad-form--disabled', enabled);
+    if (form.classList.contains('ad-form')) {
+      form.classList.toggle('ad-form--disabled', enabled);
 
-    const slider = form.querySelector('.ad-form__slider');
-    slider.classList.toggle('ad-form__slider--disabled', enabled);
-    slider.disabled = enabled;
-    continue;
+      const slider = form.querySelector('.ad-form__slider');
+      slider.classList.toggle('ad-form__slider--disabled', enabled);
+      slider.disabled = enabled;
+      continue;
+    }
   }
 };
 

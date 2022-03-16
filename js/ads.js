@@ -77,13 +77,7 @@ const renderAd = (similarAd) => {
   const ad = adTemplate.cloneNode(true);
   ad.querySelector('.popup__title').textContent = similarAd.offer.title;
   ad.querySelector('.popup__text--address').textContent = similarAd.offer.address;
-
-  const price = ad.querySelector('.popup__text--price');
-  price.textContent = `${similarAd.offer.price}`;
-  const currency = document.createElement('span');
-  currency.textContent = ' ₽/ночь';
-  price.appendChild(currency);
-
+  ad.querySelector('.popup__text--price').firstChild.textContent = `${similarAd.offer.price} `;
   ad.querySelector('.popup__type').textContent = switchEngToRus(similarAd);
   ad.querySelector('.popup__text--capacity').textContent = `${similarAd.offer.rooms}  ${getRightRoomsPronunciation(similarAd)} для ${similarAd.offer.guests} ${getRightGuestsPronunciation(similarAd)}`;
   ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAd.offer.checking} , выезд до ${similarAd.offer.checkout}`;

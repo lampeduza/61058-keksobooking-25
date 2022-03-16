@@ -14,7 +14,6 @@ const checkArguments = (min, max) => {
 
 const numberToFixed = (number, digits) => +number.toFixed(digits);
 
-// getRandomFloat is defined but never used
 const getRandomFloat = (min, max, digits = 0) => {
   min = numberToFixed(min, digits);
   max = numberToFixed(max, digits);
@@ -25,10 +24,8 @@ const getRandomFloat = (min, max, digits = 0) => {
   return numberToFixed(randomNumber, digits);
 };
 
-// getRandomElement is defined but never used
 const getRandomElement = (elements) => elements[getRandomFloat(0, elements.length - 1)];
 
-// getRandomElements is defined but never used
 const getRandomElements = (array) => {
   const clonedArray = array.slice();
   const arrayLength = getRandomFloat(1, clonedArray.length);

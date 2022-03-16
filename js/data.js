@@ -87,7 +87,6 @@ const generateAd = (avatar) => {
   };
 };
 
-
 const getObjects = () => {
   const objects = [];
   const avatarsArray = generateAvatars();
@@ -99,5 +98,4 @@ const getObjects = () => {
   return objects;
 };
 
-// На время экспортировал массив TITLES для вызова функций в main.js
 export {getObjects};

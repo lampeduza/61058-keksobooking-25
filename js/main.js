@@ -6,5 +6,5 @@ const ads = getObjects();
 
 renderAd(ads[0]);
 
-disableInterface();
 enableInterface();
+disableInterface();

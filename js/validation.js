@@ -1,20 +1,39 @@
 const adForm = document.querySelector('.ad-form');
 
 const pristine = new Pristine(adForm, {
-  classTo: 'ad-form__title',
-  errorClass: 'ad-form__title--invalid',
-  successClass: 'ad-form__title--valid',
-  errorTextParent: 'ad-form__title',
-  errorTextTag: 'span',
-  errorTextClass: 'ad-form__text-help'
+  // title
+  classTo: 'ad-form__pristine',
+  errorClass: 'ad-form__pristine--invalid',
+  successClass: 'ad-form__pristine--valid',
+  errorTextParent: 'ad-form__pristine',
+  errorTextTag: 'p',
+  errorTextClass: 'ad-form__pristine-help'
 });
 
-const validateTitle = (value) => value.length >= 30 && value.length <= 100;
+const titleField = adForm.querySelector('#title');
+const priceField = adForm.querySelector('#price');
+const roomField = adForm.querySelector('#room_number');
+const capacityField = adForm.querySelector('#capacity');
 
-// title
-// (Нужно ли автоматизировать это?
-// К примеру, сделать, чтобы в шаблонных строках из функции validateTitle брались значения min и max для 3 аргумента)
-pristine.addValidator(adForm.querySelector('#title'), validateTitle, 'от 30 до 100 символов');
+const roomOption = {
+  '1': ['1'],
+  '2': ['1', '2'],
+  '3': ['1', '2', '3'],
+  '100': ['0'],
+};
+
+const getRoomErrorMessage = () => 'Вывод ошибки';
+
+const validateTitleField = (value) => value.length >= 30 && value.length <= 100;
+const validatePriceField = (value) => value >= 0 && value <= 100000;
+
+// 'value' is defined but never used no-used-vars (хотя использую же)
+const validateRoomField = (value) => roomOption[roomField.value].includes(capacityField.value);
+
+pristine.addValidator(titleField, validateTitleField, 'от 30 до 100 символов');
+pristine.addValidator(priceField, validatePriceField, 'от 0 до 100000');
+pristine.addValidator(roomField, validateRoomField, getRoomErrorMessage);
+pristine.addValidator(capacityField, validateRoomField, getRoomErrorMessage);
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();

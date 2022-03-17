@@ -22,7 +22,19 @@ const roomOption = {
   '100': ['0'],
 };
 
-const getRoomErrorMessage = () => 'Вывод ошибки';
+const getRoomErrorMessage = () => {
+
+  switch (roomField.value) {
+    case '1':
+      return `${roomField.value} комната для 1 гостя`;
+    case '2':
+      return `${roomField.value} комнаты для 1 - 2 гостей`;
+    case '3':
+      return `${roomField.value} комнаты для 1, 2, или 3 гостей`;
+    case '100':
+      return `${roomField.value} не для гостей`;
+  }
+};
 
 const validateTitleField = (value) => value.length >= 30 && value.length <= 100;
 const validatePriceField = (value) => value >= 0 && value <= 100000;
@@ -33,9 +45,19 @@ const validateRoomField = (value) => roomOption[roomField.value].includes(capaci
 pristine.addValidator(titleField, validateTitleField, 'от 30 до 100 символов');
 pristine.addValidator(priceField, validatePriceField, 'от 0 до 100000');
 pristine.addValidator(roomField, validateRoomField, getRoomErrorMessage);
-pristine.addValidator(capacityField, validateRoomField, getRoomErrorMessage);
+// pristine.addValidator(capacityField, validateRoomField, getRoomErrorMessage);
 
 adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  pristine.validate();
+});
+
+roomField.addEventListener('change', (evt) => {
+  evt.preventDefault();
+  pristine.validate();
+});
+
+capacityField.addEventListener('change', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });

@@ -48,8 +48,9 @@ pristine.addValidator(roomField, validateRoomField, getRoomErrorMessage);
 // pristine.addValidator(capacityField, validateRoomField, getRoomErrorMessage);
 
 adForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+  if (!pristine.validate()) {
+    evt.preventDefault();
+  }
 });
 
 roomField.addEventListener('change', (evt) => {

@@ -35,20 +35,31 @@ const switchEngToRus = (similarAd) => {
 };
 
 const getRightRoomsPronunciation = (similarAd) => {
-  if (similarAd.offer.rooms === 1) {
-    return 'комната';
-  } else if (similarAd.offer.rooms <= 4) {
-    return 'комнаты';
-  } else {
-    return 'комнат';
+  const rooms = similarAd.offer.rooms;
+
+  switch (rooms < 20 ? rooms : rooms % 10) {
+    case 1:
+      return `${rooms} комната`;
+    case 2:
+    case 3:
+    case 4:
+      return `${rooms} комнаты`;
+    default:
+      return `${rooms} комнат`;
   }
 };
 
+
 const getRightGuestsPronunciation = (similarAd) => {
-  if (similarAd.offer.guests === 1) {
-    return 'гостя';
-  } else if (similarAd.offer.guests > 1) {
-    return 'гостей';
+  const guests = similarAd.offer.guests;
+
+  switch (guests) {
+    case 0:
+      return 'не для гостей';
+    case 1:
+      return 'для 1 гостя';
+    default:
+      return `для ${guests} гостей`;
   }
 };
 
@@ -74,7 +85,7 @@ const renderAd = (similarAd) => {
   ad.querySelector('.popup__text--address').textContent = similarAd.offer.address;
   ad.querySelector('.popup__text--price').firstChild.textContent = `${similarAd.offer.price} `;
   ad.querySelector('.popup__type').textContent = switchEngToRus(similarAd);
-  ad.querySelector('.popup__text--capacity').textContent = `${similarAd.offer.rooms}  ${getRightRoomsPronunciation(similarAd)} для ${similarAd.offer.guests} ${getRightGuestsPronunciation(similarAd)}`;
+  ad.querySelector('.popup__text--capacity').textContent = `${getRightRoomsPronunciation(similarAd)} ${getRightGuestsPronunciation(similarAd)}`;
   ad.querySelector('.popup__text--time').textContent = `Заезд после ${similarAd.offer.checking} , выезд до ${similarAd.offer.checkout}`;
   ad.querySelector('.popup__description').textContent = similarAd.offer.description;
   ad.querySelector('.popup__avatar').src = similarAd.author.avatar;

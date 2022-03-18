@@ -364,6 +364,11 @@ fieldset {
   padding-bottom: 5px;
 }
 
+.ad-form__pristine-help {
+  color: red;
+  margin: 5px 0 0 3px;
+}
+
 .ad-form__element input,
 .ad-form__element select,
 .ad-form__element textarea {

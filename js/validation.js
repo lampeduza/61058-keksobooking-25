@@ -54,9 +54,12 @@ const setTime = (evt, timeField) => {
 };
 
 const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
+
 const getMinimalPrice = () => {
   priceField.placeholder = typeOption[typeField.value];
+  priceField.value = '';
 };
+
 const validateTitleField = (value) => value.length >= 30 && value.length <= 100;
 const validatePriceField = (value) => value >= typeOption[typeField.value] && value <= 100000;
 const validateRoomField = (value) => roomOption[value].includes(capacityField.value);
@@ -92,6 +95,10 @@ timeInField.addEventListener('change', (evt) => {
 
 timeOutField.addEventListener('change', (evt) => {
   setTime(evt, timeInField);
+});
+
+window.addEventListener('load', () => {
+  getMinimalPrice();
 });
 
 export {adForm, pristine};

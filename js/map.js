@@ -1,5 +1,6 @@
 import {enableInterface} from './form.js';
 import {adForm} from './validation.js';
+import {getObjects} from './data.js';
 
 const map = L.map('map-canvas')
 	.on('load', () => {
@@ -13,7 +14,7 @@ const map = L.map('map-canvas')
 		{
 			lat: 35.67500,
 			lng: 139.75000,
-		}, 10);
+		}, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -56,34 +57,30 @@ const pinIcon = L.icon(
 	}
 );
 
-const pinMarker = L.marker(
-	{
-		lat: 35.70000,
-		lng: 139.80000,
-	},
-	{
-		draggable: true,
-		icon: pinIcon,
-	},
-);
+// Возврат пина и карты в начальное состояние
+const resetButton = adForm.querySelector('.ad-form__reset');
 
-pinMarker.addTo(map);
-
-// Задача : Выбор адреса. Получаем адрес. Адрес нужно связать с полем "Адрес"
-pinMarker.on('moveend', (evt) => {
-	console.log(evt.target.getLatLng());
+resetButton.addEventListener('click', () => {
+  mainPinMarker.setLatLng({lat: 35.67500,lng: 139.75000,});
+  map.setView({lat: 35.67500, lng: 139.75000,}, 13);
 });
 
+// Объявил новую переменную, которая будет генерировать пины
+const objectsArray = getObjects();
+console.log(objectsArray);
 
-// Очистка
-// Возврат пина в начальное состояние
-  const resetButton = adForm.querySelector('.ad-form__reset');
+objectsArray.forEach((objectArray) => {
+	const location = objectArray.location;
 
-  resetButton.addEventListener('click', () => {
-    mainPinMarker.setLatLng(
-      {
-        lat: 35.67500,
-        lng: 139.75000,
-      }
-    );
-  });
+	const pinMarker = L.marker(
+		{
+			lat: location.lat,
+			lng: location.lng,
+		},
+		{
+			icon: pinIcon,
+		},
+	);
+
+  pinMarker.addTo(map);
+});

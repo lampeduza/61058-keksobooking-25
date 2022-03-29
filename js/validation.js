@@ -103,4 +103,8 @@ window.addEventListener('load', () => {
   getMinimalPrice();
 });
 
+adForm.addEventListener('reset', () => {
+  pristine.reset();
+});
+
 export {adForm, pristine};

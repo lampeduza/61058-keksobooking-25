@@ -98,4 +98,6 @@ const getObjects = () => {
   return objects;
 };
 
-export {getObjects};
+const ads = getObjects();
+
+export {ads};

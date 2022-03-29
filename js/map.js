@@ -1,6 +1,9 @@
-import {enableInterface} from './form.js';
+import {disableInterface, enableInterface} from './form.js';
 import {adForm} from './validation.js';
-import {getObjects} from './data.js';
+import {renderAd} from './ads.js';
+import {ads} from './data.js';
+
+disableInterface();
 
 const map = L.map('map-canvas')
 	.on('load', () => {
@@ -65,12 +68,8 @@ resetButton.addEventListener('click', () => {
   map.setView({lat: 35.67500, lng: 139.75000,}, 13);
 });
 
-// Объявил новую переменную, которая будет генерировать пины
-const objectsArray = getObjects();
-console.log(objectsArray);
-
-objectsArray.forEach((objectArray) => {
-	const location = objectArray.location;
+ads.forEach((ad) => {
+	const location = ad.location;
 
 	const pinMarker = L.marker(
 		{
@@ -82,5 +81,7 @@ objectsArray.forEach((objectArray) => {
 		},
 	);
 
-  pinMarker.addTo(map);
+  pinMarker
+  	.addTo(map)
+  	.bindPopup(renderAd(ad));
 });

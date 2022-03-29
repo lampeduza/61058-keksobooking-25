@@ -74,19 +74,21 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
+/*
 roomField.addEventListener('change', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
+*/
 
 capacityField.addEventListener('change', (evt) => {
   evt.preventDefault();
-  pristine.validate();
+  pristine.validate(roomField);
 });
 
 typeField.addEventListener('change', () => {
   getMinimalPrice();
-  pristine.validate();
+  pristine.validate(priceField);
 });
 
 timeInField.addEventListener('change', (evt) => {

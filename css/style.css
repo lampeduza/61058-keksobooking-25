@@ -359,8 +359,16 @@ fieldset {
   max-width: 50%;
 }
 
+.ad-form__pristine {
+  position: relative;
+}
+
 .ad-form__pristine-help {
   color: red;
+  position: absolute;
+  bottom: -20px;
+  left: 2px;
+  margin: 0;
 }
 
 .ad-form__label {

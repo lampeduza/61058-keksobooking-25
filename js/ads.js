@@ -1,4 +1,4 @@
-const map = document.querySelector('.map');
+// const map = document.querySelector('.map');
 // const adsList = map.querySelector('.map__canvas');
 const adTemplate = document.querySelector('#card')
   .content

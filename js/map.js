@@ -6,18 +6,14 @@ import {ads} from './data.js';
 disableInterface();
 
 const map = L.map('map-canvas')
-	.on('load', () => {
-
-		// Задача : Разблокировать интерфейс при инициализации карты
-		// Изначально он заблокирован
-		console.log('Карта инициализирована');
-		enableInterface();
-	})
-	.setView(
-		{
-			lat: 35.67500,
-			lng: 139.75000,
-		}, 13);
+  .on('load', () => {
+    enableInterface();
+  })
+  .setView(
+    {
+      lat: 35.67500,
+      lng: 139.75000,
+    }, 13);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -27,37 +23,37 @@ L.tileLayer(
 ).addTo(map);
 
 const mainPinIcon = L.icon(
-	{
-		iconUrl: '../img/main-pin.svg',
-		iconSize: [52, 52],
-		iconAnchor: [26, 52],
-	}
+  {
+    iconUrl: '../img/main-pin.svg',
+    iconSize: [52, 52],
+    iconAnchor: [26, 52],
+  }
 );
 
 const mainPinMarker = L.marker(
-	{
-		lat: 35.67500,
-		lng: 139.75000,
-	},
-	{
-		draggable: true,
-		icon: mainPinIcon,
-	},
+  {
+    lat: 35.67500,
+    lng: 139.75000,
+  },
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
 );
 
 mainPinMarker.addTo(map);
 
 // Задача : Выбор адреса. Получаем адрес. Адрес нужно связать с полем "Адрес"
 mainPinMarker.on('moveend', (evt) => {
-	console.log(evt.target.getLatLng());
+  console.log(evt.target.getLatLng());
 });
 
 const pinIcon = L.icon(
-	{
-		iconUrl: '../img/pin.svg',
-		iconSize: [40, 40],
-		iconAnchor: [20, 40],
-	}
+  {
+    iconUrl: '../img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  }
 );
 
 // Возврат пина и карты в начальное состояние
@@ -69,19 +65,17 @@ resetButton.addEventListener('click', () => {
 });
 
 ads.forEach((ad) => {
-	const location = ad.location;
+  const location = ad.location;
 
-	const pinMarker = L.marker(
-		{
-			lat: location.lat,
-			lng: location.lng,
-		},
-		{
-			icon: pinIcon,
-		},
-	);
+  const pinMarker = L.marker(
+    {
+      lat: location.lat,
+      lng: location.lng,
+    },
+    {
+      icon: pinIcon,
+    },
+  );
 
-  pinMarker
-  	.addTo(map)
-  	.bindPopup(renderAd(ad));
+  pinMarker.addTo(map).bindPopup(renderAd(ad));
 });

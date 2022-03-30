@@ -1,5 +1,5 @@
-const map = document.querySelector('.map');
-const adsList = map.querySelector('.map__canvas');
+// const map = document.querySelector('.map');
+// const adsList = map.querySelector('.map__canvas');
 const adTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -92,8 +92,8 @@ const renderAd = (similarAd) => {
   ad.querySelector('.popup__text--price').firstChild.textContent = `${similarAd.offer.price} `;
   addFeatures(ad, similarAd);
   createImages(ad, similarAd);
-  adsListFragment.appendChild(ad);
-  adsList.appendChild(adsListFragment);
+  return adsListFragment.appendChild(ad);
+  // adsList.appendChild(adsListFragment);
 };
 
 export {renderAd};

@@ -107,4 +107,4 @@ adForm.addEventListener('reset', () => {
   pristine.reset();
 });
 
-export {adForm, priceField, typeField, pristine};
+export {adForm, priceField, typeField, typeOption, pristine};

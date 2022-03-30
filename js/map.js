@@ -43,9 +43,11 @@ const mainPinMarker = L.marker(
 
 mainPinMarker.addTo(map);
 
-// Задача : Выбор адреса. Получаем адрес. Адрес нужно связать с полем "Адрес"
+const inputAddress = adForm.querySelector('input[name="address"]');
+
 mainPinMarker.on('moveend', (evt) => {
-  console.log(evt.target.getLatLng());
+  const location = evt.target.getLatLng();
+  inputAddress.value = `${location.lat.toFixed(5)} ${location.lng.toFixed(5)}`;
 });
 
 const pinIcon = L.icon(
@@ -55,14 +57,6 @@ const pinIcon = L.icon(
     iconAnchor: [20, 40],
   }
 );
-
-// Возврат пина и карты в начальное состояние
-const resetButton = adForm.querySelector('.ad-form__reset');
-
-resetButton.addEventListener('click', () => {
-  mainPinMarker.setLatLng({lat: 35.67500,lng: 139.75000,});
-  map.setView({lat: 35.67500, lng: 139.75000,}, 13);
-});
 
 ads.forEach((ad) => {
   const location = ad.location;
@@ -79,3 +73,5 @@ ads.forEach((ad) => {
 
   pinMarker.addTo(map).bindPopup(renderAd(ad));
 });
+
+export {map, mainPinMarker};

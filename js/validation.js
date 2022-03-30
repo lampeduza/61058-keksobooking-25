@@ -1,3 +1,5 @@
+import {map, mainPinMarker} from './map.js';
+
 const adForm = document.querySelector('.ad-form');
 
 const pristine = new Pristine(adForm, {
@@ -47,18 +49,9 @@ const getRoomErrorMessage = () => {
   }
 };
 
-const setTime = (evt, timeField) => {
-  const value = evt.target.value;
-
-  timeField.value = value;
-};
-
+const setTime = (evt, timeField) => timeField.value = evt.target.value;
 const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
-
-const getMinimalPrice = () => {
-  priceField.placeholder = typeOption[typeField.value];
-  priceField.value = '';
-};
+const getMinimalPrice = () => priceField.placeholder = typeOption[typeField.value];
 
 const validateTitleField = (value) => value.length >= 30 && value.length <= 100;
 const validatePriceField = (value) => value >= typeOption[typeField.value] && value <= 100000;
@@ -105,6 +98,8 @@ window.addEventListener('load', () => {
 
 adForm.addEventListener('reset', () => {
   pristine.reset();
+  mainPinMarker.setLatLng({lat: 35.67500,lng: 139.75000,});
+  map.setView({lat: 35.67500, lng: 139.75000,}, 13);
 });
 
-export {adForm, priceField, typeField, typeOption, pristine};
+export {adForm, priceField, typeField, typeOption};

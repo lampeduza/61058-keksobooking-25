@@ -23,3 +23,9 @@ typeField.addEventListener('change', (evt) => {
 priceField.addEventListener('input', () => {
   priceSlider.noUiSlider.set(priceField.value);
 });
+
+adForm.addEventListener('reset', () => {
+    priceSlider.noUiSlider.updateOptions({
+      start: 1000,
+    });
+});

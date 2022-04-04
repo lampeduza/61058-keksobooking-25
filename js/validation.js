@@ -49,19 +49,6 @@ const getRoomErrorMessage = () => {
   }
 };
 
-const setTime = (evt, timeField) => {
-  const value = evt.target.value;
-
-  timeField.value = value;
-};
-
-const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
-
-const getMinimalPrice = () => {
-  priceField.placeholder = typeOption[typeField.value];
-  priceField.value = '';
-};
-
 const setTime = (evt, timeField) => timeField.value = evt.target.value;
 const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
 const getMinimalPrice = () => priceField.placeholder = typeOption[typeField.value];
@@ -80,13 +67,6 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-/*
-roomField.addEventListener('change', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
-*/
-
 capacityField.addEventListener('change', (evt) => {
   evt.preventDefault();
   pristine.validate(roomField);
@@ -95,10 +75,7 @@ capacityField.addEventListener('change', (evt) => {
 typeField.addEventListener('change', () => {
   getMinimalPrice();
   pristine.validate(priceField);
-<<<<<<< HEAD
 
-=======
->>>>>>> 77a2ffd64b58bbb99f3465c247d40a5f73f770d8
 });
 
 timeInField.addEventListener('change', (evt) => {
@@ -119,8 +96,5 @@ adForm.addEventListener('reset', () => {
   map.setView({lat: 35.67500, lng: 139.75000,}, 13);
 });
 
-<<<<<<< HEAD
-export {adForm, priceField, typeField, typeOption};
-=======
+
 export {adForm, priceField, typeField, typeOption, pristine};
->>>>>>> 77a2ffd64b58bbb99f3465c247d40a5f73f770d8

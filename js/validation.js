@@ -95,7 +95,10 @@ capacityField.addEventListener('change', (evt) => {
 typeField.addEventListener('change', () => {
   getMinimalPrice();
   pristine.validate(priceField);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 77a2ffd64b58bbb99f3465c247d40a5f73f770d8
 });
 
 timeInField.addEventListener('change', (evt) => {
@@ -116,4 +119,8 @@ adForm.addEventListener('reset', () => {
   map.setView({lat: 35.67500, lng: 139.75000,}, 13);
 });
 
+<<<<<<< HEAD
 export {adForm, priceField, typeField, typeOption};
+=======
+export {adForm, priceField, typeField, typeOption, pristine};
+>>>>>>> 77a2ffd64b58bbb99f3465c247d40a5f73f770d8

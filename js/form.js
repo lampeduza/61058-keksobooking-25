@@ -1,3 +1,5 @@
+import {activateInterfaceFeatures, deactivateInterfaceFeatures} from './price-slider.js';
+
 const changeInterfaceState = (enabled) => {
   const forms = document.forms;
 
@@ -22,7 +24,7 @@ const changeInterfaceState = (enabled) => {
   }
 };
 
-const enableInterface = () => changeInterfaceState(false);
-const disableInterface = () => changeInterfaceState(true);
+const enableInterface = (activateFeatures) => changeInterfaceState(false);
+const disableInterface = (deactivateFeatures) => changeInterfaceState(true);
 
 export {disableInterface, enableInterface};

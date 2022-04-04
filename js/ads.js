@@ -1,5 +1,3 @@
-// const map = document.querySelector('.map');
-// const adsList = map.querySelector('.map__canvas');
 const adTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -93,7 +91,6 @@ const renderAd = (similarAd) => {
   addFeatures(ad, similarAd);
   createImages(ad, similarAd);
   return adsListFragment.appendChild(ad);
-  // adsList.appendChild(adsListFragment);
 };
 
 export {renderAd};

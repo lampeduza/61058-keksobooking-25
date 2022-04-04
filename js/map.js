@@ -1,13 +1,13 @@
 import {disableInterface, enableInterface} from './form.js';
+import {activateInterfaceFeatures, deactivateInterfaceFeatures} from './price-slider.js';
 import {adForm} from './validation.js';
 import {renderAd} from './ads.js';
-import {ads} from './data.js';
 
-disableInterface();
+disableInterface(deactivateInterfaceFeatures());
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    enableInterface();
+    enableInterface(activateInterfaceFeatures());
   })
   .setView(
     {
@@ -58,20 +58,22 @@ const pinIcon = L.icon(
   }
 );
 
-ads.forEach((ad) => {
-  const location = ad.location;
+const setupMap = (ads) => {
+  ads.forEach((ad) => {
+    const location = ad.location;
 
-  const pinMarker = L.marker(
-    {
-      lat: location.lat,
-      lng: location.lng,
-    },
-    {
-      icon: pinIcon,
-    },
-  );
+    const pinMarker = L.marker(
+      {
+        lat: location.lat,
+        lng: location.lng,
+      },
+      {
+        icon: pinIcon,
+      },
+    );
 
-  pinMarker.addTo(map).bindPopup(renderAd(ad));
-});
+    pinMarker.addTo(map).bindPopup(renderAd(ad));
+  });
+};
 
-export {map, mainPinMarker};
+export {map, mainPinMarker, setupMap};

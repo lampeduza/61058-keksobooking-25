@@ -12,20 +12,36 @@ noUiSlider.create(priceSlider, {
   },
 });
 
-priceSlider.noUiSlider.on('update', () => {
+const onPriceSliderUpdate = () => {
   priceField.value = parseInt(priceSlider.noUiSlider.get(), 10);
-});
+};
 
-typeField.addEventListener('change', (evt) => {
+const onTypeFieldChange = (evt) => {
   priceSlider.noUiSlider.set(typeOption[evt.target.value]);
-});
+};
 
-priceField.addEventListener('input', () => {
+const onPriceFieldInput = () => {
   priceSlider.noUiSlider.set(priceField.value);
-});
+};
+
+// activate features
+const activateInterfaceFeatures = () => {
+  priceSlider.noUiSlider.on('update', onPriceSliderUpdate);
+  typeField.addEventListener('change', onTypeFieldChange);
+  priceField.addEventListener('input', onPriceFieldInput);
+};
+
+// deactivate features
+const deactivateInterfaceFeatures = () => {
+  priceSlider.noUiSlider.off('update', onPriceSliderUpdate);
+  typeField.removeEventListener('change', onTypeFieldChange);
+  priceField.removeEventListener('input', onPriceFieldInput);
+};
 
 adForm.addEventListener('reset', () => {
     priceSlider.noUiSlider.updateOptions({
       start: 1000,
     });
 });
+
+export {activateInterfaceFeatures, deactivateInterfaceFeatures};

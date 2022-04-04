@@ -1,4 +1,5 @@
-// import {renderAd} from './ads.js';
-// import {adForm, pristine} from './validation.js';
-import './map.js';
+import {setupMap} from './map.js';
 import './price-slider.js';
+import {ads} from './data.js';
+
+setupMap(ads);

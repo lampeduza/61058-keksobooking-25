@@ -3,7 +3,8 @@ import {activateInterfaceFeatures, deactivateInterfaceFeatures} from './price-sl
 import {adForm} from './validation.js';
 import {renderAd} from './ads.js';
 
-disableInterface();
+const setupMap = (ads) => {
+  disableInterface();
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -58,7 +59,6 @@ const pinIcon = L.icon(
   }
 );
 
-const setupMap = (ads) => {
   ads.forEach((ad) => {
     const location = ad.location;
 
@@ -76,4 +76,4 @@ const setupMap = (ads) => {
   });
 };
 
-export {map, mainPinMarker, setupMap};
+export {setupMap};

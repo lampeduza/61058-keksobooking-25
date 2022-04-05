@@ -1,4 +1,4 @@
-import {mainPinMarker, map} from './map.js';
+import {setupMap} from './map.js';
 
 const adForm = document.querySelector('.ad-form');
 

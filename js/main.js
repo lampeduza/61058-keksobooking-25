@@ -1,12 +1,4 @@
-import {getObjects} from './data.js';
-import {renderAd} from './ads.js';
-import {disableInterface, enableInterface} from './form.js';
+import {setupMap} from './map.js';
+import {ads} from './data.js';
 
-import {adForm, pristine} from './validation.js';
-
-const ads = getObjects();
-
-renderAd(ads[0]);
-
-disableInterface();
-enableInterface();
+setupMap(ads);

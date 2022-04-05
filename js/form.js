@@ -1,3 +1,5 @@
+import {activateInterfaceFeatures, deactivateInterfaceFeatures} from './price-slider.js';
+
 const changeInterfaceState = (enabled) => {
   const forms = document.forms;
 
@@ -19,6 +21,12 @@ const changeInterfaceState = (enabled) => {
       slider.disabled = enabled;
       continue;
     }
+  }
+
+  if (enabled) {
+    deactivateInterfaceFeatures();
+  } else {
+    activateInterfaceFeatures();
   }
 };
 

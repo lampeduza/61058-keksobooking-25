@@ -1,5 +1,4 @@
 import {disableInterface, enableInterface} from './form.js';
-import {activateInterfaceFeatures, deactivateInterfaceFeatures} from './price-slider.js';
 import {adForm} from './validation.js';
 import {renderAd} from './ads.js';
 
@@ -30,7 +29,7 @@ const setupMap = (ads) => {
   const mainPinMarker = L.marker({
     lat: 35.67500,
     lng: 139.75000,
-  }, {
+  },{
     draggable: true,
     icon: mainPinIcon,
   }, );
@@ -61,6 +60,11 @@ const setupMap = (ads) => {
     }, );
 
     pinMarker.addTo(map).bindPopup(renderAd(ad));
+  });
+
+  adForm.addEventListener('reset', () => {
+    mainPinMarker.setLatLng({lat: 35.67500, lng: 139.75000,});
+    map.setView({lat: 35.67500, lng: 139.75000,}, 13);
   });
 };
 

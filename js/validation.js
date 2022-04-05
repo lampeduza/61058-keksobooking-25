@@ -97,8 +97,6 @@ window.addEventListener('load', () => {
 
 adForm.addEventListener('reset', () => {
   pristine.reset();
-  mainPinMarker.setLatLng({lat: 35.67500,lng: 139.75000,});
-  map.setView({lat: 35.67500, lng: 139.75000,}, 13);
 });
 
 

@@ -3,11 +3,11 @@ import {activateInterfaceFeatures, deactivateInterfaceFeatures} from './price-sl
 import {adForm} from './validation.js';
 import {renderAd} from './ads.js';
 
-disableInterface(deactivateInterfaceFeatures());
+disableInterface();
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    enableInterface(activateInterfaceFeatures());
+    enableInterface();
   })
   .setView(
     {

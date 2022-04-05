@@ -39,9 +39,9 @@ const deactivateInterfaceFeatures = () => {
 };
 
 adForm.addEventListener('reset', () => {
-    priceSlider.noUiSlider.updateOptions({
-      start: 1000,
-    });
+  priceSlider.noUiSlider.updateOptions({
+    start: 1000,
+  });
 });
 
 export {activateInterfaceFeatures, deactivateInterfaceFeatures};

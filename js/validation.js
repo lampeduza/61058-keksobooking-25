@@ -49,9 +49,14 @@ const getRoomErrorMessage = () => {
   }
 };
 
-const setTime = (evt, timeField) => timeField.value = evt.target.value;
+const setTime = (evt, timeField) => {
+  timeField.value = evt.target.value;
+};
+
 const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
-const getMinimalPrice = () => priceField.placeholder = typeOption[typeField.value];
+const getMinimalPrice = () => {
+  priceField.placeholder = typeOption[typeField.value];
+};
 
 const validateTitleField = (value) => value.length >= 30 && value.length <= 100;
 const validatePriceField = (value) => value >= typeOption[typeField.value] && value <= 100000;

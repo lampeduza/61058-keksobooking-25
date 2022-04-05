@@ -22,9 +22,11 @@ const changeInterfaceState = (enabled) => {
       continue;
     }
   }
+
+  (enabled) ? deactivateInterfaceFeatures() : activateInterfaceFeatures();
 };
 
-const enableInterface = (activateFeatures) => changeInterfaceState(false);
-const disableInterface = (deactivateFeatures) => changeInterfaceState(true);
+const enableInterface = () => changeInterfaceState(false);
+const disableInterface = () => changeInterfaceState(true);
 
 export {disableInterface, enableInterface};

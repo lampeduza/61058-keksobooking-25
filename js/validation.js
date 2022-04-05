@@ -1,5 +1,3 @@
-import {setupMap} from './map.js';
-
 const adForm = document.querySelector('.ad-form');
 
 const pristine = new Pristine(adForm, {

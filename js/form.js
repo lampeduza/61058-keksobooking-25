@@ -23,7 +23,11 @@ const changeInterfaceState = (enabled) => {
     }
   }
 
-  enabled ? deactivateInterfaceFeatures() : activateInterfaceFeatures();
+  if (enabled) {
+    deactivateInterfaceFeatures();
+  } else {
+    activateInterfaceFeatures();
+  }
 };
 
 const enableInterface = () => changeInterfaceState(false);

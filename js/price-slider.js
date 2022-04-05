@@ -24,14 +24,12 @@ const onPriceFieldInput = () => {
   priceSlider.noUiSlider.set(priceField.value);
 };
 
-// activate features
 const activateInterfaceFeatures = () => {
   priceSlider.noUiSlider.on('update', onPriceSliderUpdate);
   typeField.addEventListener('change', onTypeFieldChange);
   priceField.addEventListener('input', onPriceFieldInput);
 };
 
-// deactivate features
 const deactivateInterfaceFeatures = () => {
   priceSlider.noUiSlider.off('update', onPriceSliderUpdate);
   typeField.removeEventListener('change', onTypeFieldChange);

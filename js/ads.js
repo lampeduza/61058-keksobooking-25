@@ -72,7 +72,7 @@ const createImages = (ad, similarAd) => {
     for (const photo of similarAd.offer.photos) {
       const clonedImage = adPhotosImage.cloneNode(true);
       clonedImage.src = photo;
-      imagesListFragment.appendChild(clonedImage);    
+      imagesListFragment.appendChild(clonedImage);
     }
 
     adPhotosList.appendChild(imagesListFragment);

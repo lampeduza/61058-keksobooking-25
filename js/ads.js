@@ -10,14 +10,16 @@ const addFeatures = (ad, similarAd) => {
     adFeaturesList.firstChild.remove();
   }
 
-  for (const feature of similarAd.offer.features) {
-    const adFeaturesElement = document.createElement('li');
-    adFeaturesElement.classList.add('popup__feature', `popup__feature--${feature}`);
-    const clonedElement = adFeaturesElement.cloneNode(true);
-    featuresListFragment.appendChild(clonedElement);
-  }
+  if (similarAd.offer.features) {
+    for (const feature of similarAd.offer.features) {
+      const adFeaturesElement = document.createElement('li');
+      adFeaturesElement.classList.add('popup__feature', `popup__feature--${feature}`);
+      const clonedElement = adFeaturesElement.cloneNode(true);
+      featuresListFragment.appendChild(clonedElement);
+    }
 
-  adFeaturesList.appendChild(featuresListFragment);
+    adFeaturesList.appendChild(featuresListFragment);
+  }
 };
 
 const switchEngToRus = (similarAd) => {
@@ -66,14 +68,17 @@ const createImages = (ad, similarAd) => {
   const adPhotosImage = adPhotosList.querySelector('.popup__photo');
   const imagesListFragment = document.createDocumentFragment();
 
-  for (const photo of similarAd.offer.photos) {
-    const clonedImage = adPhotosImage.cloneNode(true);
-    clonedImage.src = photo;
-    imagesListFragment.appendChild(clonedImage);
+  if (similarAd.offer.photos) {
+    for (const photo of similarAd.offer.photos) {
+      const clonedImage = adPhotosImage.cloneNode(true);
+      clonedImage.src = photo;
+      imagesListFragment.appendChild(clonedImage);    
+    }
+
+    adPhotosList.appendChild(imagesListFragment);
   }
 
   adPhotosImage.remove();
-  adPhotosList.appendChild(imagesListFragment);
 };
 
 const renderAd = (similarAd) => {

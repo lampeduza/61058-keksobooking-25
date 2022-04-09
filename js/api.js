@@ -1,6 +1,7 @@
 import {adForm} from './validation.js';
 import {SHOW_ALERT_TIME} from './data.js';
 
+// get
 const getData = (onSuccess) => {
 	fetch('https://25.javascript.pages.academy/keksobooking/data')
 		.then((response) => {
@@ -11,6 +12,7 @@ const getData = (onSuccess) => {
 		.then((data) => onSuccess(data));
 };
 
+// send
 const sendData = () => {
 	fetch('https://25.javascript.pages.academy/keksobooking',
 		{
@@ -23,6 +25,8 @@ const sendData = () => {
 		.then((response) => {
 			if (response.ok) {
 				// Показать попап об успешной отправке данных
+				// Сообщение должно исчезать по нажатию на клавишу Esc и по клику на произвольную область экрана (window)
+				// Нужно удалять обработчики
 				showMessage(successTemplate);
 				console.log('show successful message');
 				return;
@@ -32,6 +36,9 @@ const sendData = () => {
 		})
 		.catch((err) => {
 			// Показать попап об ошибке отправке данных
+			// Сообщение должно исчезать после нажатия на .error__button,
+			// по нажатию на Esc и по клику на произвольную область экрана (window)
+			// + сохранить данные для повторной отправки формы
 			showMessage(errorTemplate);
 			console.log('show error message');
 		});
@@ -45,18 +52,6 @@ const errorTemplate = document.querySelector('#error')
 	.content
 	.querySelector('.error');
 
-const addStyles = (template) => {
-	template.style.zindex = 100;
-	template.style.position = 'absolute';
-	template.style.left = 0;
-	template.style.right = 0;
-	template.style.top = 0;
-};
-
-const showMessage = (template) => {
-	addStyles(template);
-
-	document.body.append(template);
-};
+const showMessage = (template) => document.body.append(template);
 
 export {getData, sendData};

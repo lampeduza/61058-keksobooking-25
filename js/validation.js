@@ -1,4 +1,5 @@
 const adForm = document.querySelector('.ad-form');
+import {sendData} from './api.js';
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__pristine',
@@ -65,8 +66,10 @@ pristine.addValidator(priceField, validatePriceField, getPriceErrorMessage);
 pristine.addValidator(roomField, validateRoomField, getRoomErrorMessage);
 
 adForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
+  evt.preventDefault();
+
+  if (pristine.validate()) {
+    sendData();
   }
 });
 

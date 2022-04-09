@@ -50,6 +50,8 @@ const PHOTOS = [
 
 const PIN_COUNT = 10;
 
+const SHOW_ALERT_TIME = 3000;
+
 const generateAvatars = () => {
   const array = [];
 
@@ -102,4 +104,4 @@ const getObjects = () => {
 
 const ads = getObjects();
 
-export {ads, PIN_COUNT};
+export {ads, PIN_COUNT, SHOW_ALERT_TIME};

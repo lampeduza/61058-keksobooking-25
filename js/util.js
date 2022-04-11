@@ -34,8 +34,6 @@ const getRandomElements = (array) => {
   return clonedArray.slice(0, arrayLength);
 };
 
-const isEscapeKey = (evt) => {
-  return evt.key === 'Escape';
-};
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {getRandomFloat, getRandomElement, getRandomElements, isEscapeKey};

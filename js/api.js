@@ -22,36 +22,7 @@ const errorTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
 
-const sendData = () => {
-  fetch('https://25.javascript.pages.academy/keksobooking',
-    {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: new FormData(adForm),
-    },
-  )
-
-    .then((response) => {
-      if (response.ok) {
-        showSuccessMessage();
-        console.log('show successful message');
-        return;
-      }
-
-      throw new Error(`${response.status} ${response.statusText}`);
-    })
-    .catch((err) => {
-      // сохранить данные для повторной отправки формы
-      showErrorMessage();
-      console.log(err);
-    });
-};
-
-const closeSuccessMessage = () => {
-  successTemplate.remove();
-  window.removeEventListener('click', onSuccessWindowClick);
-  window.removeEventListener('keydown', onSuccessWindowKeydown);
-};
+const button = errorTemplate.querySelector('.error__button');
 
 const onSuccessWindowClick = () => {
   closeSuccessMessage();
@@ -61,13 +32,6 @@ const onSuccessWindowKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     closeSuccessMessage();
   }
-};
-
-const closeErrorMessage = () => {
-  errorTemplate.remove();
-  window.removeEventListener('click', onErrorWindowClick);
-  window.removeEventListener('keydown', onErrorWindowKeydown);
-  button.removeEventListener('click', onButtonClick);
 };
 
 const onErrorWindowClick = () => {
@@ -84,6 +48,19 @@ const onButtonClick = () => {
   closeErrorMessage();
 };
 
+const closeSuccessMessage = () => {
+  successTemplate.remove();
+  window.removeEventListener('click', onSuccessWindowClick);
+  window.removeEventListener('keydown', onSuccessWindowKeydown);
+};
+
+const closeErrorMessage = () => {
+  errorTemplate.remove();
+  window.removeEventListener('click', onErrorWindowClick);
+  window.removeEventListener('keydown', onErrorWindowKeydown);
+  button.removeEventListener('click', onButtonClick);
+};
+
 const showSuccessMessage = () => {
   document.body.append(successTemplate);
 
@@ -97,13 +74,34 @@ const showErrorMessage = () => {
   window.addEventListener('click', onErrorWindowClick);
   window.addEventListener('keydown', onErrorWindowKeydown);
 
-  const button = errorTemplate.querySelector('.error__button');
-  
   if (!button) {
     return;
   }
 
   button.addEventListener('click', onButtonClick);
+};
+
+const sendData = () => {
+  fetch('https://25.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: new FormData(adForm),
+    },
+  )
+
+    .then((response) => {
+      if (response.ok) {
+        showSuccessMessage();
+        return;
+      }
+
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
+    .catch(() => {
+      // сохранить данные для повторной отправки формы
+      showErrorMessage();
+    });
 };
 
 export {getData, sendData};

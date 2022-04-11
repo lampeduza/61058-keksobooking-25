@@ -14,8 +14,7 @@ const addFeatures = (ad, similarAd) => {
     for (const feature of similarAd.offer.features) {
       const adFeaturesElement = document.createElement('li');
       adFeaturesElement.classList.add('popup__feature', `popup__feature--${feature}`);
-      const clonedElement = adFeaturesElement.cloneNode(true);
-      featuresListFragment.appendChild(clonedElement);
+      featuresListFragment.appendChild(adFeaturesElement);
     }
 
     adFeaturesList.appendChild(featuresListFragment);

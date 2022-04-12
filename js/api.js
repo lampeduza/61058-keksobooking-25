@@ -48,27 +48,27 @@ const onButtonClick = () => {
   closeErrorMessage();
 };
 
-const closeSuccessMessage = () => {
+function closeSuccessMessage() {
   successTemplate.remove();
   window.removeEventListener('click', onSuccessWindowClick);
   window.removeEventListener('keydown', onSuccessWindowKeydown);
-};
+}
 
-const closeErrorMessage = () => {
+function closeErrorMessage() {
   errorTemplate.remove();
   window.removeEventListener('click', onErrorWindowClick);
   window.removeEventListener('keydown', onErrorWindowKeydown);
   button.removeEventListener('click', onButtonClick);
-};
+}
 
-const showSuccessMessage = () => {
+function showSuccessMessage() {
   document.body.append(successTemplate);
 
   window.addEventListener('click', onSuccessWindowClick);
   window.addEventListener('keydown', onSuccessWindowKeydown);
-};
+}
 
-const showErrorMessage = () => {
+function showErrorMessage() {
   document.body.append(errorTemplate);
 
   window.addEventListener('click', onErrorWindowClick);
@@ -79,7 +79,7 @@ const showErrorMessage = () => {
   }
 
   button.addEventListener('click', onButtonClick);
-};
+}
 
 const sendData = () => {
   fetch('https://25.javascript.pages.academy/keksobooking',

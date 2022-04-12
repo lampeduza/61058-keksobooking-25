@@ -81,7 +81,7 @@ function showErrorMessage() {
   button.addEventListener('click', onButtonClick);
 }
 
-const sendData = () => {
+const sendData = (callback) => {
   fetch('https://25.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
@@ -93,6 +93,7 @@ const sendData = () => {
     .then((response) => {
       if (response.ok) {
         showSuccessMessage();
+        callback();
         return;
       }
 

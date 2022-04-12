@@ -1,15 +1,7 @@
-const adForm = document.querySelector('.ad-form');
 import {sendData} from './api.js';
+import {setCurrentAddress, putMapBack} from './map.js';
 
-const pristine = new Pristine(adForm, {
-  classTo: 'ad-form__pristine',
-  errorClass: 'ad-form__pristine--invalid',
-  successClass: 'ad-form__pristine--valid',
-  errorTextParent: 'ad-form__pristine',
-  errorTextTag: 'p',
-  errorTextClass: 'ad-form__pristine-help'
-});
-
+const adForm = document.querySelector('.ad-form');
 const titleField = adForm.querySelector('#title');
 const priceField = adForm.querySelector('#price');
 const roomField = adForm.querySelector('#room_number');
@@ -33,6 +25,15 @@ const typeOption = {
   'palace': 10000,
 };
 
+const pristine = new Pristine(adForm, {
+  classTo: 'ad-form__pristine',
+  errorClass: 'ad-form__pristine--invalid',
+  successClass: 'ad-form__pristine--valid',
+  errorTextParent: 'ad-form__pristine',
+  errorTextTag: 'p',
+  errorTextClass: 'ad-form__pristine-help'
+});
+
 const getTitleErrorMessage = () => 'от 30 до 100 символов';
 
 const getRoomErrorMessage = () => {
@@ -53,6 +54,7 @@ const setTime = (evt, timeField) => {
 };
 
 const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
+
 const getMinimalPrice = () => {
   priceField.placeholder = typeOption[typeField.value];
 };
@@ -64,14 +66,6 @@ const validateRoomField = (value) => roomOption[value].includes(capacityField.va
 pristine.addValidator(titleField, validateTitleField, getTitleErrorMessage);
 pristine.addValidator(priceField, validatePriceField, getPriceErrorMessage);
 pristine.addValidator(roomField, validateRoomField, getRoomErrorMessage);
-
-adForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  if (pristine.validate()) {
-    sendData();
-  }
-});
 
 capacityField.addEventListener('change', (evt) => {
   evt.preventDefault();
@@ -96,8 +90,24 @@ window.addEventListener('load', () => {
   getMinimalPrice();
 });
 
+const putInterfaceBack = () => {
+  adForm.reset();
+  getMinimalPrice();
+  putMapBack();
+  setCurrentAddress();
+};
+
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  if (pristine.validate()) {
+    sendData(putInterfaceBack);
+  }
+});
+
 adForm.addEventListener('reset', () => {
   pristine.reset();
+  putInterfaceBack();
 });
 
 

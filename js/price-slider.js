@@ -1,4 +1,4 @@
-import {adForm, priceField, typeOption} from './validation.js';
+import {adForm, priceField} from './validation.js';
 
 const priceSlider = adForm.querySelector('.ad-form__slider');
 

@@ -105,7 +105,7 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-resetButton.addEventListener('click', (evt) => {
+resetButton.addEventListener('click', () => {
   pristine.reset();
   putInterfaceBack();
 });

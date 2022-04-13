@@ -1,4 +1,4 @@
-import {adForm, priceField, typeField, typeOption} from './validation.js';
+import {adForm, priceField, typeOption} from './validation.js';
 
 const priceSlider = adForm.querySelector('.ad-form__slider');
 
@@ -16,23 +16,17 @@ const onPriceSliderUpdate = () => {
   priceField.value = parseInt(priceSlider.noUiSlider.get(), 10);
 };
 
-const onTypeFieldChange = (evt) => {
-  priceSlider.noUiSlider.set(typeOption[evt.target.value]);
-};
-
 const onPriceFieldInput = () => {
   priceSlider.noUiSlider.set(priceField.value);
 };
 
 const activateInterfaceFeatures = () => {
   priceSlider.noUiSlider.on('slide', onPriceSliderUpdate);
-  // typeField.addEventListener('change', onTypeFieldChange);
   priceField.addEventListener('input', onPriceFieldInput);
 };
 
 const deactivateInterfaceFeatures = () => {
   priceSlider.noUiSlider.off('slide', onPriceSliderUpdate);
-  // typeField.removeEventListener('change', onTypeFieldChange);
   priceField.removeEventListener('input', onPriceFieldInput);
 };
 

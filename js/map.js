@@ -7,37 +7,37 @@ const inputAddress = adForm.querySelector('input[name="address"]');
 const map = L.map('map-canvas');
 
 const mainPinIcon = L.icon({
-    iconUrl: '../img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26, 52],
-  });
+  iconUrl: '../img/main-pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
+});
 
 const pinIcon = L.icon({
-    iconUrl: '../img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
+  iconUrl: '../img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
 
-  const mainPinMarker = L.marker({
-    lat: 35.67500,
-    lng: 139.75000,
-  },{
-    draggable: true,
-    icon: mainPinIcon,
-  }, );
+const mainPinMarker = L.marker({
+  lat: 35.67500,
+  lng: 139.75000,
+},{
+  draggable: true,
+  icon: mainPinIcon,
+}, );
 
-  function setCurrentAddress() {
-    const location = mainPinMarker.getLatLng();
-    inputAddress.value = `${location.lat.toFixed(5)} ${location.lng.toFixed(5)}`;
-  };
+function setCurrentAddress() {
+  const location = mainPinMarker.getLatLng();
+  inputAddress.value = `${location.lat.toFixed(5)} ${location.lng.toFixed(5)}`;
+}
 
 const setupMap = (ads) => {
   disableInterface();
 
-    map.on('load', () => {
-      enableInterface();
-      setTimeout(setCurrentAddress, 0);
-    })
+  map.on('load', () => {
+    enableInterface();
+    setTimeout(setCurrentAddress, 0);
+  })
     .setView({
       lat: 35.67500,
       lng: 139.75000,

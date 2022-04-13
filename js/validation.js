@@ -2,6 +2,7 @@ import {sendData} from './api.js';
 import {setCurrentAddress, putMapBack} from './map.js';
 
 const adForm = document.querySelector('.ad-form');
+const resetButton = adForm.querySelector('.ad-form__reset');
 const titleField = adForm.querySelector('#title');
 const priceField = adForm.querySelector('#price');
 const roomField = adForm.querySelector('#room_number');
@@ -55,7 +56,7 @@ const setTime = (evt, timeField) => {
 
 const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
 
-const getMinimalPrice = () => {
+const setMinimalPrice = () => {
   priceField.placeholder = typeOption[typeField.value];
 };
 
@@ -73,9 +74,8 @@ capacityField.addEventListener('change', (evt) => {
 });
 
 typeField.addEventListener('change', () => {
-  getMinimalPrice();
+  setMinimalPrice();
   pristine.validate(priceField);
-
 });
 
 timeInField.addEventListener('change', (evt) => {
@@ -87,14 +87,14 @@ timeOutField.addEventListener('change', (evt) => {
 });
 
 window.addEventListener('load', () => {
-  getMinimalPrice();
+  setMinimalPrice();
 });
 
 const putInterfaceBack = () => {
   adForm.reset();
-  getMinimalPrice();
+  setMinimalPrice();
   putMapBack();
-  setCurrentAddress();
+  setTimeout(setCurrentAddress, 0);
 };
 
 adForm.addEventListener('submit', (evt) => {
@@ -105,10 +105,9 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-adForm.addEventListener('reset', () => {
+resetButton.addEventListener('click', (evt) => {
   pristine.reset();
   putInterfaceBack();
 });
-
 
 export {adForm, priceField, typeField, typeOption, pristine};

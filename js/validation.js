@@ -1,14 +1,8 @@
+import {sendData} from './api.js';
+import {setCurrentAddress, putMapBack} from './map.js';
+
 const adForm = document.querySelector('.ad-form');
-
-const pristine = new Pristine(adForm, {
-  classTo: 'ad-form__pristine',
-  errorClass: 'ad-form__pristine--invalid',
-  successClass: 'ad-form__pristine--valid',
-  errorTextParent: 'ad-form__pristine',
-  errorTextTag: 'p',
-  errorTextClass: 'ad-form__pristine-help'
-});
-
+const resetButton = adForm.querySelector('.ad-form__reset');
 const titleField = adForm.querySelector('#title');
 const priceField = adForm.querySelector('#price');
 const roomField = adForm.querySelector('#room_number');
@@ -32,6 +26,15 @@ const typeOption = {
   'palace': 10000,
 };
 
+const pristine = new Pristine(adForm, {
+  classTo: 'ad-form__pristine',
+  errorClass: 'ad-form__pristine--invalid',
+  successClass: 'ad-form__pristine--valid',
+  errorTextParent: 'ad-form__pristine',
+  errorTextTag: 'p',
+  errorTextClass: 'ad-form__pristine-help'
+});
+
 const getTitleErrorMessage = () => 'от 30 до 100 символов';
 
 const getRoomErrorMessage = () => {
@@ -52,7 +55,8 @@ const setTime = (evt, timeField) => {
 };
 
 const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
-const getMinimalPrice = () => {
+
+const setMinimalPrice = () => {
   priceField.placeholder = typeOption[typeField.value];
 };
 
@@ -64,21 +68,14 @@ pristine.addValidator(titleField, validateTitleField, getTitleErrorMessage);
 pristine.addValidator(priceField, validatePriceField, getPriceErrorMessage);
 pristine.addValidator(roomField, validateRoomField, getRoomErrorMessage);
 
-adForm.addEventListener('submit', (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
-  }
-});
-
 capacityField.addEventListener('change', (evt) => {
   evt.preventDefault();
   pristine.validate(roomField);
 });
 
 typeField.addEventListener('change', () => {
-  getMinimalPrice();
+  setMinimalPrice();
   pristine.validate(priceField);
-
 });
 
 timeInField.addEventListener('change', (evt) => {
@@ -90,12 +87,27 @@ timeOutField.addEventListener('change', (evt) => {
 });
 
 window.addEventListener('load', () => {
-  getMinimalPrice();
+  setMinimalPrice();
 });
 
-adForm.addEventListener('reset', () => {
+const putInterfaceBack = () => {
+  adForm.reset();
+  setMinimalPrice();
+  putMapBack();
+  setTimeout(setCurrentAddress, 0);
+};
+
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  if (pristine.validate()) {
+    sendData(putInterfaceBack);
+  }
+});
+
+resetButton.addEventListener('click', () => {
   pristine.reset();
+  putInterfaceBack();
 });
-
 
 export {adForm, priceField, typeField, typeOption, pristine};

@@ -48,6 +48,10 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
 
+const PIN_COUNT = 10;
+
+// const SHOW_ALERT_TIME = 3000;
+
 const generateAvatars = () => {
   const array = [];
 
@@ -100,4 +104,4 @@ const getObjects = () => {
 
 const ads = getObjects();
 
-export {ads};
+export {ads, PIN_COUNT, /*SHOW_ALERT_TIME*/};

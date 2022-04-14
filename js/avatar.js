@@ -30,7 +30,7 @@ const createPhoto = () => {
 	previewApartmentArea.append(apartmentImage);
 };
 
-
+// Выбор фотографии жилья (загрузка фотография жилья)
 const chooseApartmentPhoto = () => {
 	createPhoto();
 	// input
@@ -48,7 +48,5 @@ const chooseApartmentPhoto = () => {
 		}
 	});
 };
-
-// Выбор фотографии жилья (загрузка фотография жилья)
 
 export {chooseAvatar, chooseApartmentPhoto};

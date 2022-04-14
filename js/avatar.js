@@ -18,5 +18,37 @@ const chooseAvatar = () => {
 	});
 };
 
+const previewApartmentArea = adForm.querySelector('.ad-form__photo');
+const apartmentImage = document.createElement('img');
+
+// Функция для создания фотографии жилья
+const createPhoto = () => {
+	// create an image
+	apartmentImage.classList.add('ad-form__photo-apartment');
+	apartmentImage.width = 70;
+	apartmentImage.height = 70;
+	previewApartmentArea.append(apartmentImage);
+};
+
+
+const chooseApartmentPhoto = () => {
+	createPhoto();
+	// input
+	const apartmentChooser = adForm.querySelector('input[name="images"]');
+
+	apartmentChooser.addEventListener('change', () => {
+		const image = apartmentChooser.files[0];
+		const apartmentImageName = image.name.toLowerCase();
+
+		const matches = FILE_TYPES.some((it) => apartmentImageName.endsWith(it));
+
+		if (matches) {
+			apartmentImage.src = URL.createObjectURL(image);
+			apartmentImage.alt = 'Фотография жилья';
+		}
+	});
+};
+
 // Выбор фотографии жилья (загрузка фотография жилья)
-export {chooseAvatar};
+
+export {chooseAvatar, chooseApartmentPhoto};

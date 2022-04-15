@@ -70,7 +70,6 @@ const setHousingPrice = (cb) => {
 	housingPrice.addEventListener('change', cb);
 };
 
-
 // По особенностям (checkboxes)
 const isSimilarFeatures = (ad) => {
 	const adFeatures = ad.offer.features;
@@ -101,7 +100,6 @@ const setHousingFeatures = (cb) => {
 		feature.addEventListener('click', cb);
 	}
 };
-
 
 const compareAds = (ad) => {
 	return isSimilarHousingType(ad) && isSimilarHousingRooms(ad) && isSimilarHousingGuests(ad) && isSimilarHousingPrice(ad) && isSimilarFeatures(ad);

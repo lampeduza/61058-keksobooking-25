@@ -50,9 +50,9 @@ const PHOTOS = [
 
 const PIN_COUNT = 10;
 
-const FILE_TYPES = ['jpeg', 'jpg', 'png', 'gif'];
+const RERENDER_DELAY = 500;
 
-// const SHOW_ALERT_TIME = 3000;
+const FILE_TYPES = ['jpeg', 'jpg', 'png', 'gif'];
 
 const generateAvatars = () => {
   const array = [];
@@ -106,4 +106,4 @@ const getObjects = () => {
 
 const ads = getObjects();
 
-export {ads, PIN_COUNT, FILE_TYPES};
+export {ads, PIN_COUNT, FILE_TYPES, RERENDER_DELAY};

@@ -8,7 +8,7 @@ const housingType = mapFilters.querySelector('select[name="housing-type"]');
 const housingPrice = mapFilters.querySelector('select[name="housing-price"]');
 const housingRooms = mapFilters.querySelector('select[name="housing-rooms"]');
 const housingGuests = mapFilters.querySelector('select[name="housing-guests"]');
-
+const featuresContainer = mapFilters.querySelector('#housing-features');
 
 // По типу
 const isSimilarHousingType = (ad) => {
@@ -20,7 +20,6 @@ const isSimilarHousingType = (ad) => {
 const setHousingType = (cb) => {
 	housingType.addEventListener('change', cb);
 };
-
 
 // По количеству комнат
 const isSimilarHousingRooms = (ad) => {
@@ -45,7 +44,6 @@ const setHousingGuests = (cb) => {
 };
 
 // По цене
-// По количеству комнат
 const isSimilarHousingPrice = (ad) => {
 	const adPrice = ad.offer.price;
 	const minPrice = 10000;
@@ -72,8 +70,41 @@ const setHousingPrice = (cb) => {
 	housingPrice.addEventListener('change', cb);
 };
 
-const compareAds = (ad) => {
-	return isSimilarHousingType(ad) && isSimilarHousingRooms(ad) && isSimilarHousingGuests(ad) && isSimilarHousingPrice(ad);
+
+// По особенностям (checkboxes)
+const isSimilarFeatures = (ad) => {
+	const adFeatures = ad.offer.features;
+	const chosenFeatures = featuresContainer.querySelectorAll('input[type="checkbox"]:checked');
+	let flag = true;
+
+	if (chosenFeatures.length) {
+		if (!adFeatures || !adFeatures.length) {
+			return false;
+		}
+
+		chosenFeatures.forEach((chosenFeature) => {
+			const isContains = adFeatures.includes(chosenFeature.value);
+
+			if (!isContains) {
+				flag = false;
+			}
+		});
+	}
+
+	return flag;
 };
 
-export {compareAds, setHousingType, setHousingRooms, setHousingGuests, setHousingPrice};
+const setHousingFeatures = (cb) => {
+	const features = featuresContainer.children;
+
+	for (let feature of features) {
+		feature.addEventListener('click', cb);
+	}
+};
+
+
+const compareAds = (ad) => {
+	return isSimilarHousingType(ad) && isSimilarHousingRooms(ad) && isSimilarHousingGuests(ad) && isSimilarHousingPrice(ad) && isSimilarFeatures(ad);
+};
+
+export {compareAds, setHousingType, setHousingRooms, setHousingGuests, setHousingPrice, setHousingFeatures};

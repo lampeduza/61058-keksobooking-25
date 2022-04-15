@@ -1,10 +1,13 @@
 import {disableInterface, enableInterface} from './form.js';
 import {adForm} from './validation.js';
 import {renderAd} from './ads.js';
+import {PIN_COUNT} from './data.js';
+import {compareAds} from './filter.js';
 
 const inputAddress = adForm.querySelector('input[name="address"]');
-
 const map = L.map('map-canvas');
+const markerGroup = L.layerGroup();
+
 
 const mainPinIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
@@ -31,7 +34,7 @@ function setCurrentAddress() {
   inputAddress.value = `${location.lat.toFixed(5)} ${location.lng.toFixed(5)}`;
 }
 
-const setupMap = (ads) => {
+const setupMap = () => {
   disableInterface();
 
   map.on('load', () => {
@@ -56,7 +59,21 @@ const setupMap = (ads) => {
     inputAddress.value = `${location.lat.toFixed(5)} ${location.lng.toFixed(5)}`;
   });
 
-  ads.forEach((ad) => {
+  markerGroup.addTo(map);
+};
+
+const putMapBack = () => {
+  mainPinMarker.setLatLng({lat: 35.67500, lng: 139.75000,});
+  map.setView({lat: 35.67500, lng: 139.75000,}, 13);
+};
+
+const renderAds = (ads) => {
+  markerGroup.clearLayers();
+  
+  ads
+    .filter((ad) => compareAds(ad))
+    .slice(0, PIN_COUNT)
+    .forEach((ad) => {
     const location = ad.location;
 
     const pinMarker = L.marker({
@@ -66,13 +83,8 @@ const setupMap = (ads) => {
       icon: pinIcon,
     }, );
 
-    pinMarker.addTo(map).bindPopup(renderAd(ad));
+    pinMarker.addTo(markerGroup).bindPopup(renderAd(ad));
   });
 };
 
-const putMapBack = () => {
-  mainPinMarker.setLatLng({lat: 35.67500, lng: 139.75000,});
-  map.setView({lat: 35.67500, lng: 139.75000,}, 13);
-};
-
-export {setupMap, setCurrentAddress, putMapBack};
+export {setupMap, setCurrentAddress, putMapBack, renderAds};

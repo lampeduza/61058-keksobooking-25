@@ -3,16 +3,13 @@ import {isEscapeKey} from './util.js';
 import {disableInterface, enableInterface} from './form.js';
 import {mapFilters} from './filter.js';
 
-const dataErrorTemplate = document.querySelector('#data-error')
-  .content
-  .querySelector('.data-error');
+const dataError = document.querySelector('.data-error');
 
 const showDataError = () => {
-  document.body.append(dataErrorTemplate);
-  dataErrorTemplate.classList.add('data-error--showed');
+  dataError.classList.add('data-error--showed');
 
   setTimeout(() => {
-    dataErrorTemplate.classList.remove('data-error--showed');
+    dataError.classList.remove('data-error--showed');
   }, 5000);
 };
 

@@ -1,6 +1,4 @@
 import {shuffleArray} from './sort.js';
-// https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError
 
 const checkArguments = (min, max) => {
   if (min < 0) {
@@ -36,4 +34,12 @@ const getRandomElements = (array) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomFloat, getRandomElement, getRandomElements, isEscapeKey};
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRandomFloat, getRandomElement, getRandomElements, isEscapeKey, debounce};

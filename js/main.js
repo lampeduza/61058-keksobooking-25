@@ -1,5 +1,19 @@
-import {setupMap} from './map.js';
-import {PIN_COUNT} from './data.js';
+import {setupMap, renderAds} from './map.js';
 import {getData} from './api.js';
+import {addTypeChangeHandler, addRoomsChangeHandler, addGuestsChangeHandler, addPriceChangeHandler, addFeaturesChangeHandler} from './filter.js';
+import {setupAvatarChooser, setupApartmentPhoto} from './avatar.js';
+import {RERENDER_DELAY} from './data.js';
+import {debounce} from './util.js';
 
-getData((data) => setupMap(data.slice(0, PIN_COUNT)));
+setupMap();
+
+getData((data) => {
+  renderAds(data);
+  addTypeChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addRoomsChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addGuestsChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addPriceChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addFeaturesChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+});
+setupAvatarChooser();
+setupApartmentPhoto();

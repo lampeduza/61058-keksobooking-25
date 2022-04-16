@@ -1,8 +1,6 @@
 import {adForm} from './validation.js';
 import {isEscapeKey} from './util.js';
-// import {SHOW_ALERT_TIME} from './data.js';
 
-// get
 const getData = (onSuccess) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
     .then((response) => {
@@ -13,7 +11,6 @@ const getData = (onSuccess) => {
     .then((data) => onSuccess(data));
 };
 
-// send
 const successTemplate = document.querySelector('#success')
   .content
   .querySelector('.success');
@@ -100,7 +97,6 @@ const sendData = (callback) => {
       throw new Error(`${response.status} ${response.statusText}`);
     })
     .catch(() => {
-      // сохранить данные для повторной отправки формы
       showErrorMessage();
     });
 };

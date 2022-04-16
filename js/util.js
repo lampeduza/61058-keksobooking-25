@@ -1,6 +1,4 @@
 import {shuffleArray} from './sort.js';
-// https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError
 
 const checkArguments = (min, max) => {
   if (min < 0) {

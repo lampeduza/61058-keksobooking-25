@@ -1,8 +1,7 @@
 import {adForm} from './validation.js';
 import {FILE_TYPES} from './data.js';
 
-// Выбор Аватарки (загрузка аватарки)
-const chooseAvatar = () => {
+const setupAvatarChooser = () => {
   const imageChooser = adForm.querySelector('input[name="avatar"]');
   const previewArea = adForm.querySelector('.ad-form-header__preview img');
 
@@ -21,19 +20,12 @@ const chooseAvatar = () => {
 const previewApartmentArea = adForm.querySelector('.ad-form__photo');
 const apartmentImage = document.createElement('img');
 
-// Функция для создания фотографии жилья
-const createPhoto = () => {
-  // create an image
+const chooseApartmentPhoto = () => {
   apartmentImage.classList.add('ad-form__photo-apartment');
   apartmentImage.width = 70;
   apartmentImage.height = 70;
   previewApartmentArea.append(apartmentImage);
-};
 
-// Выбор фотографии жилья (загрузка фотография жилья)
-const chooseApartmentPhoto = () => {
-  createPhoto();
-  // input
   const apartmentChooser = adForm.querySelector('input[name="images"]');
 
   apartmentChooser.addEventListener('change', () => {
@@ -49,4 +41,4 @@ const chooseApartmentPhoto = () => {
   });
 };
 
-export {chooseAvatar, chooseApartmentPhoto};
+export {setupAvatarChooser, chooseApartmentPhoto};

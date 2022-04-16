@@ -8,7 +8,6 @@ const inputAddress = adForm.querySelector('input[name="address"]');
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup();
 
-
 const mainPinIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
   iconSize: [52, 52],

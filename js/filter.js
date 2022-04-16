@@ -71,7 +71,7 @@ const isSimilarFeatures = (ad) => {
       return false;
     }
 
-    for (let chosenFeature of chosenFeatures) {
+    for (const chosenFeature of chosenFeatures) {
       const isContains = adFeatures.includes(chosenFeature.value);
 
       if (!isContains) {

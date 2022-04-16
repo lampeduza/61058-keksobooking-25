@@ -20,7 +20,7 @@ const setupAvatarChooser = () => {
 const previewApartmentArea = adForm.querySelector('.ad-form__photo');
 const apartmentImage = document.createElement('img');
 
-const chooseApartmentPhoto = () => {
+const setupApartmentPhoto = () => {
   apartmentImage.classList.add('ad-form__photo-apartment');
   apartmentImage.width = 70;
   apartmentImage.height = 70;
@@ -41,4 +41,4 @@ const chooseApartmentPhoto = () => {
   });
 };
 
-export {setupAvatarChooser, chooseApartmentPhoto};
+export {setupAvatarChooser, setupApartmentPhoto};

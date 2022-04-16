@@ -65,28 +65,22 @@ const addPriceChangeHandler = (cb) => {
 const isSimilarFeatures = (ad) => {
   const adFeatures = ad.offer.features;
   const chosenFeatures = featuresContainer.querySelectorAll('input[type="checkbox"]:checked');
-  let flag = true;
 
   if (chosenFeatures.length) {
     if (!adFeatures || !adFeatures.length) {
       return false;
     }
 
-    let i = 0;
-
-    while (flag && i < chosenFeatures.length) {
-      const chosenFeature = chosenFeatures[i].value;
-      const isContains = adFeatures.includes(chosenFeature);
-
-      i++;
+    for (let chosenFeature of chosenFeatures) {
+      const isContains = adFeatures.includes(chosenFeature.value);
 
       if (!isContains) {
-        flag = false;
+        return false;
       }
     }
   }
 
-  return flag;
+  return true;
 };
 
 const addFeaturesChangeHandler = (cb) => {

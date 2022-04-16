@@ -1,7 +1,7 @@
 import {setupMap, renderAds} from './map.js';
 import {getData} from './api.js';
 import {addTypeChangeHandler, addRoomsChangeHandler, addGuestsChangeHandler, addPriceChangeHandler, addFeaturesChangeHandler} from './filter.js';
-import {setupAvatarChooser, chooseApartmentPhoto} from './avatar.js';
+import {setupAvatarChooser, setupApartmentPhoto} from './avatar.js';
 import {RERENDER_DELAY} from './data.js';
 import {debounce} from './util.js';
 
@@ -16,4 +16,4 @@ getData((data) => {
   addFeaturesChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
 });
 setupAvatarChooser();
-chooseApartmentPhoto();
+setupApartmentPhoto();

@@ -1015,6 +1015,32 @@ fieldset {
   background-image: url("../img/muffin-red.svg");
 }
 
+.data-error {
+  display: none;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: red;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.data-error--showed {
+  display: block;
+}
+
+.data-error__text {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin: 0;
+}
+
+
 .error__button {
   padding: 10px;
 

@@ -1,10 +1,10 @@
 import {adForm} from './validation.js';
 import {FILE_TYPES} from './data.js';
 
-const setupAvatarChooser = () => {
-  const imageChooser = adForm.querySelector('input[name="avatar"]');
-  const previewArea = adForm.querySelector('.ad-form-header__preview img');
+const imageChooser = adForm.querySelector('input[name="avatar"]');
+const previewArea = adForm.querySelector('.ad-form-header__preview img');
 
+const setupAvatarChooser = () => {
   imageChooser.addEventListener('change', () => {
     const image = imageChooser.files[0];
     const imageName = image.name.toLowerCase();
@@ -21,8 +21,9 @@ const previewApartmentArea = adForm.querySelector('.ad-form__photo');
 const apartmentImage = document.createElement('img');
 
 const setupApartmentPhoto = () => {
+
   apartmentImage.classList.add('ad-form__photo-apartment');
-  apartmentImage.width = 70;
+  apartmentImage.maxWidth = 70;
   apartmentImage.height = 70;
   previewApartmentArea.append(apartmentImage);
 
@@ -41,4 +42,4 @@ const setupApartmentPhoto = () => {
   });
 };
 
-export {setupAvatarChooser, setupApartmentPhoto};
+export {setupAvatarChooser, setupApartmentPhoto, previewArea, apartmentImage};

@@ -1,5 +1,20 @@
 import {adForm} from './validation.js';
 import {isEscapeKey} from './util.js';
+import {disableInterface, enableInterface} from './form.js';
+import {mapFilters} from './filter.js';
+
+const dataErrorTemplate = document.querySelector('#data-error')
+  .content
+  .querySelector('.data-error');
+
+const showDataError = () => {
+  document.body.append(dataErrorTemplate);
+  dataErrorTemplate.classList.add('data-error--showed');
+
+  setTimeout(() => {
+    dataErrorTemplate.classList.remove('data-error--showed');
+  }, 5000);
+};
 
 const getData = (onSuccess) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
@@ -7,8 +22,17 @@ const getData = (onSuccess) => {
       if (response.ok) {
         return response.json();
       }
+
+      throw new Error('Не удалось загрузить данные');
     })
-    .then((data) => onSuccess(data));
+    .then((data) => {
+      onSuccess(data);
+      enableInterface(mapFilters);
+    })
+    .catch(() => {
+      disableInterface(mapFilters);
+      showDataError();
+    });
 };
 
 const successTemplate = document.querySelector('#success')

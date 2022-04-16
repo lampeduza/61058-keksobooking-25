@@ -14,7 +14,7 @@ const showDataError = () => {
   setTimeout(() => {
     dataErrorTemplate.classList.remove('data-error--showed');
   }, 5000);
-}
+};
 
 const getData = (onSuccess) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
@@ -29,8 +29,7 @@ const getData = (onSuccess) => {
       onSuccess(data);
       enableInterface(mapFilters);
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(() => {
       disableInterface(mapFilters);
       showDataError();
     });

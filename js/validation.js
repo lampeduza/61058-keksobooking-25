@@ -12,14 +12,14 @@ const typeField = adForm.querySelector('#type');
 const timeInField = adForm.querySelector('#timein');
 const timeOutField = adForm.querySelector('#timeout');
 
-const roomOption = {
+const roomOptions = {
   '1': ['1'],
   '2': ['1', '2'],
   '3': ['1', '2', '3'],
   '100': ['0'],
 };
 
-const typeOption = {
+const typeOptions = {
   'bungalow': 0,
   'flat': 1000,
   'hotel': 3000,
@@ -55,15 +55,15 @@ const setTime = (evt, timeField) => {
   timeField.value = evt.target.value;
 };
 
-const getPriceErrorMessage = () => `от ${typeOption[typeField.value]} до 100000`;
+const getPriceErrorMessage = () => `от ${typeOptions[typeField.value]} до 100000`;
 
 const setMinimalPrice = () => {
-  priceField.placeholder = typeOption[typeField.value];
+  priceField.placeholder = typeOptions[typeField.value];
 };
 
 const validateTitleField = (value) => value.length >= 30 && value.length <= 100;
-const validatePriceField = (value) => value >= typeOption[typeField.value] && value <= 100000;
-const validateRoomField = (value) => roomOption[value].includes(capacityField.value);
+const validatePriceField = (value) => value >= typeOptions[typeField.value] && value <= 100000;
+const validateRoomField = (value) => roomOptions[value].includes(capacityField.value);
 
 pristine.addValidator(titleField, validateTitleField, getTitleErrorMessage);
 pristine.addValidator(priceField, validatePriceField, getPriceErrorMessage);
@@ -117,4 +117,4 @@ const addResetButtonClickHandler = (cb) => {
   });
 };
 
-export {adForm, priceField, typeField, typeOption, pristine, addAdFormSubmitHandler, addResetButtonClickHandler};
+export {adForm, priceField, typeField, typeOptions, pristine, addAdFormSubmitHandler, addResetButtonClickHandler};

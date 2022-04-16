@@ -18,6 +18,7 @@ getData((data) => {
     renderAds(data);
     previewArea.src = 'img/muffin-grey.svg';
     apartmentImage.removeAttribute('src');
+    apartmentImage.removeAttribute('alt');
   }, RERENDER_DELAY));
   addResetButtonClickHandler(debounce(() => {
     renderAds(data);

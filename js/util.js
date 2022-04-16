@@ -40,6 +40,6 @@ const debounce = (callback, timeoutDelay = 500) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 export {getRandomFloat, getRandomElement, getRandomElements, isEscapeKey, debounce};

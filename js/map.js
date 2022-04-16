@@ -68,22 +68,22 @@ const putMapBack = () => {
 
 const renderAds = (ads) => {
   markerGroup.clearLayers();
-  
+
   ads
     .filter((ad) => compareAds(ad))
     .slice(0, PIN_COUNT)
     .forEach((ad) => {
-    const location = ad.location;
+      const location = ad.location;
 
-    const pinMarker = L.marker({
-      lat: location.lat,
-      lng: location.lng,
-    }, {
-      icon: pinIcon,
-    }, );
+      const pinMarker = L.marker({
+        lat: location.lat,
+        lng: location.lng,
+      }, {
+        icon: pinIcon,
+      }, );
 
-    pinMarker.addTo(markerGroup).bindPopup(renderAd(ad));
-  });
+      pinMarker.addTo(markerGroup).bindPopup(renderAd(ad));
+    });
 };
 
 export {setupMap, setCurrentAddress, putMapBack, renderAds};

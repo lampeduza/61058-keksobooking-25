@@ -38,7 +38,6 @@ const setupMap = () => {
 
   map.on('load', () => {
     setTimeout(() => enableInterface(adForm), 1000);
-    // enableInterface(document.querySelector('.ad-form'));
     setTimeout(setCurrentAddress, 0);
   })
     .setView({

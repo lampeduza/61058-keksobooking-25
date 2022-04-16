@@ -1,5 +1,6 @@
 import {sendData} from './api.js';
 import {setCurrentAddress, putMapBack} from './map.js';
+import {mapFilters} from './filter.js';
 
 const adForm = document.querySelector('.ad-form');
 const resetButton = adForm.querySelector('.ad-form__reset');
@@ -90,24 +91,30 @@ window.addEventListener('load', () => {
   setMinimalPrice();
 });
 
-const putInterfaceBack = () => {
+const putInterfaceBack = (cb) => {
   adForm.reset();
   setMinimalPrice();
   putMapBack();
+  mapFilters.reset();
+  cb();
   setTimeout(setCurrentAddress, 0);
 };
 
-adForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+const addAdFormSubmitHandler = (cb) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-  if (pristine.validate()) {
-    sendData(putInterfaceBack);
-  }
-});
+    if (pristine.validate()) {
+      sendData(() => putInterfaceBack(cb));
+    }
+  });
+};
 
-resetButton.addEventListener('click', () => {
-  pristine.reset();
-  putInterfaceBack();
-});
+const addResetButtonClickHandler = (cb) => {
+  resetButton.addEventListener('click', () => {
+    pristine.reset();
+    putInterfaceBack(cb);
+  });
+};
 
-export {adForm, priceField, typeField, typeOption, pristine};
+export {adForm, priceField, typeField, typeOption, pristine, addAdFormSubmitHandler, addResetButtonClickHandler};

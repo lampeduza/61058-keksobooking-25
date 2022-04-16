@@ -1,7 +1,5 @@
 import {activateInterfaceFeatures, deactivateInterfaceFeatures} from './price-slider.js';
 
-const formsList = document.forms;
-
 const changeInterfaceState = (enabled, ...forms) => {
   if (!forms.length) {
     forms = document.forms;

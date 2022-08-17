@@ -1,6 +1,5 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Марк Леммер](https://up.htmlacademy.ru/javascript/25/user/61058).
 * Наставник: [Александр Пинаев](https://htmlacademy.ru/profile/id1075973) ☯.
 
 ---

@@ -1,14 +1,31 @@
-import {getRandomFloat, getRandomElement, getRandomElements} from './util.js';
-import {shuffleArray} from './sort.js';
-import {getObjectsArray, TITLES} from './data.js'; // На время импортировал массив TITLES для вызова функций в main.js
+import {setupMap, renderAds} from './map.js';
+import {getData} from './api.js';
+import {addTypeChangeHandler, addRoomsChangeHandler, addGuestsChangeHandler, addPriceChangeHandler, addFeaturesChangeHandler} from './filter.js';
+import {setupAvatarChooser, setupApartmentPhoto, previewArea, apartmentImage} from './avatar.js';
+import {RERENDER_DELAY} from './data.js';
+import {debounce} from './util.js';
+import {addAdFormSubmitHandler, addResetButtonClickHandler} from './validation.js';
+setupMap();
 
-getObjectsArray();
-
-// Вызовы функций
-// Передал данные (цифры) как моки (несуществующие данные, данные для примера)
-getRandomFloat(1, 5, 5);
-
-// Передал массив TITLES
-getRandomElement(TITLES);
-getRandomElements(TITLES);
-shuffleArray(TITLES);
+getData((data) => {
+  renderAds(data);
+  addTypeChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addRoomsChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addGuestsChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addPriceChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addFeaturesChangeHandler(debounce(() => renderAds(data), RERENDER_DELAY));
+  addAdFormSubmitHandler(debounce(() => {
+    renderAds(data);
+    previewArea.src = 'img/muffin-grey.svg';
+    apartmentImage.removeAttribute('src');
+    apartmentImage.removeAttribute('alt');
+  }, RERENDER_DELAY));
+  addResetButtonClickHandler(debounce(() => {
+    renderAds(data);
+    previewArea.src = 'img/muffin-grey.svg';
+    apartmentImage.removeAttribute('src');
+    apartmentImage.removeAttribute('alt');
+  }, RERENDER_DELAY));
+});
+setupAvatarChooser();
+setupApartmentPhoto();
